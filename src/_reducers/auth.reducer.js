@@ -9,27 +9,26 @@ import {
 } from '../_actions/auth.actions';
 import createReducer from '../_utils/createReducer';
 
-const token = getCookie('JSESSIONID') || '';
-const auth = sessionStorage.getItem('auth');
+const token = getCookie('JSESSIONID') || sessionStorage.getItem('token');
+const auth = !!token;
 
 const defaultState = auth
   ? {
-    isLoggedIn: true,
-    isUserLoginProcessing: false,
-    isUserLogoutProcessing: false,
-    errorMessage: null,
-    token,
-    auth,
-  }
+      isLoggedIn: true,
+      isUserLoginProcessing: false,
+      isUserLogoutProcessing: false,
+      errorMessage: null,
+      token,
+      auth,
+    }
   : {
-    isLoggedIn: false,
-    isUserLoginProcessing: false,
-    isUserLogoutProcessing: false,
-    errorMessage: null,
-    token,
-    auth,
-  };
-
+      isLoggedIn: false,
+      isUserLoginProcessing: false,
+      isUserLogoutProcessing: false,
+      errorMessage: null,
+      token,
+      auth,
+    };
 
 export default createReducer(defaultState, (state, action) => ({
   [USER_LOGIN_REQUEST]: () => ({
@@ -41,7 +40,6 @@ export default createReducer(defaultState, (state, action) => ({
     isUserLoginProcessing: false,
     isLoggedIn: true,
     token: action.payload.token,
-    auth: action.payload.auth,
   }),
   [USER_LOGIN_FAILURE]: () => ({
     ...state,
@@ -56,6 +54,7 @@ export default createReducer(defaultState, (state, action) => ({
     ...state,
     isUserLogoutProcessing: false,
     isLoggedIn: false,
+    token: action.payload.token,
   }),
   [USER_LOGOUT_FAILURE]: () => ({
     ...state,

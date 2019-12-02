@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import useForm from 'react-hook-form';
+import { Link as RoterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Avatar,
@@ -41,23 +42,23 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Register = (props) => {
+const Register = props => {
   const { handleSubmit, register, errors } = useForm();
   const classes = useStyles();
 
   const EmailProps = {
-    id: "email",
-    label: "Email Address",
-    name: "email",
-    autoComplete: "email",
+    id: 'email',
+    label: 'Email Address',
+    name: 'email',
+    autoComplete: 'email',
   };
   const PasswordProps = {
-    id: "password",
-    label: "Password",
-    name: "password",
-    type: "password",
-    autoComplete: "current-password",
-  }
+    id: 'password',
+    label: 'Password',
+    name: 'password',
+    type: 'password',
+    autoComplete: 'current-password',
+  };
 
   const onSubmit = values => {
     console.log(values);
@@ -66,9 +67,7 @@ const Register = (props) => {
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          ui
-        </Avatar>
+        <Avatar className={classes.avatar}>ui</Avatar>
         <Typography component="h1" variant="h4">
           Sign up
         </Typography>
@@ -124,12 +123,7 @@ const Register = (props) => {
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
-                control={
-                  <Checkbox
-                    value="allowExtraEmails"
-                    color="primary"
-                  />
-                }
+                control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I want to receive inspiration, marketing promotions and updates via email."
               />
             </Grid>
@@ -145,7 +139,7 @@ const Register = (props) => {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link to={'/'} variant="body2" component={RoterLink}>
                 Already have an account? Sign in
               </Link>
             </Grid>
@@ -157,6 +151,6 @@ const Register = (props) => {
       </Box>
     </Container>
   );
-}
+};
 
 export default Register;

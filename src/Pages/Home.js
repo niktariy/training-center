@@ -16,13 +16,13 @@ class Home extends React.Component {
         </Typography>
         <List>
           <ListItem>
-            <Link to={'/'}>Home</Link>
+            <Link to={'/home'}>Home</Link>
           </ListItem>
           <ListItem>
-            <Link to={'/Login'}>Login</Link>
+            <Link to={'/login'}>Login</Link>
           </ListItem>
           <ListItem>
-            <Link to={'/Register'}>Register</Link>
+            <Link to={'/register'}>Register</Link>
           </ListItem>
         </List>
       </Container>

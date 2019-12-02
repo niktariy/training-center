@@ -1,4 +1,4 @@
-import { history } from "../_utils/history";
+import { history } from '../_utils/history';
 import { userService } from '../_services';
 
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
@@ -19,7 +19,8 @@ export const userLoginAction = ({ username, password }) => dispatch => {
     password,
   };
 
-  userService.login(userData)
+  userService
+    .login(userData)
     .then(res => {
       dispatch({
         type: USER_LOGIN_SUCCESS,
@@ -28,6 +29,7 @@ export const userLoginAction = ({ username, password }) => dispatch => {
           auth: true,
         },
       });
+      sessionStorage.setItem('token', res.data.token);
       history.push('/courses');
     })
     .catch(error => {
@@ -43,16 +45,17 @@ export const userLogoutAction = () => dispatch => {
     type: USER_LOGOUT_REQUEST,
   });
 
-  userService.logout()
+  userService
+    .logout()
     .then(() => {
-      sessionStorage.removeItem('auth');
+      sessionStorage.removeItem('token');
       dispatch({
         type: USER_LOGOUT_SUCCESS,
         payload: {
           token: '',
-          auth: sessionStorage.getItem('auth'),
         },
       });
+      history.push('/');
     })
     .catch(error => {
       dispatch({
@@ -60,7 +63,5 @@ export const userLogoutAction = () => dispatch => {
         payload: error.message,
       });
     });
-  // sessionStorage.removeItem('auth');
-  // dispatch(logoutUser());
-  // history.push('/');
+  // ;
 };

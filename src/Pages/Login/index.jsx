@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useForm from 'react-hook-form';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link as RoterLink } from 'react-router-dom';
 import { userLoginAction } from '../../_actions/auth.actions';
 
 import {
@@ -18,14 +18,13 @@ import {
   Container,
 } from '@material-ui/core';
 
-import API from '../../_utils/api';
-
 import Copyright from '../../_components/Copyright';
+import { history } from '../../_utils/history';
 import { useStyles } from './styles';
 
-const Login = ({userLoginAction}) => {
+const Login = ({ userLoginAction, token }) => {
   const { handleSubmit, register, errors } = useForm({
-    mode: 'onBlur'
+    mode: 'onBlur',
   });
   const classes = useStyles();
 
@@ -44,17 +43,21 @@ const Login = ({userLoginAction}) => {
     autoComplete: 'current-password',
   };
 
-  const onSubmit = (values) => {
-    // API.post('/login', {username, password})
+  useEffect(() => {
+    // TODO: rewrite with document coockie
+    if (sessionStorage.getItem('token') !== null) {
+      history.push('/courses');
+    }
+  });
+
+  const onSubmit = values => {
     userLoginAction(values);
   };
 
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          ui
-        </Avatar>
+        <Avatar className={classes.avatar}>ui</Avatar>
         <Typography component="h1" variant="h4">
           Sign in
         </Typography>
@@ -72,8 +75,8 @@ const Login = ({userLoginAction}) => {
               required: 'Required',
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: 'invalid email address'
-              }
+                message: 'invalid email address',
+              },
             })}
           />
           <TextField
@@ -87,17 +90,20 @@ const Login = ({userLoginAction}) => {
             inputRef={register({
               required: 'Required',
               pattern: {
-                message: 'At least 8 digits, 1 uppercase letter, 1 lowercase letter, and 1 number. Can contain special characters'
-              }
+                message:
+                  'At least 8 digits, 1 uppercase letter, 1 lowercase letter, and 1 number. Can contain special characters',
+              },
             })}
           />
           <FormControlLabel
-            control={<Checkbox
-              value="remember"
-              name="rememberMe"
-              color="primary"
-              inputRef={register}
-            />}
+            control={
+              <Checkbox
+                value="remember"
+                name="rememberMe"
+                color="primary"
+                inputRef={register}
+              />
+            }
             label="Remember me"
           />
           <Button
@@ -117,7 +123,7 @@ const Login = ({userLoginAction}) => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link to={'/register'} variant="body2" component={RoterLink}>
                 Don't have an account? Sign Up
               </Link>
             </Grid>
@@ -129,14 +135,21 @@ const Login = ({userLoginAction}) => {
       </Box>
     </Container>
   );
-}
+};
 
 Login.propTypes = {
   userLoginAction: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = ({
-  userLoginAction
-});
+const mapStateToProps = state => {
+  return { token: state.authReducer.token };
+};
 
-export default connect(null, mapDispatchToProps)(Login);
+const mapDispatchToProps = {
+  userLoginAction,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);
