@@ -17,6 +17,7 @@ import {
   Notifications as NotificationsIcon,
 } from '@material-ui/icons';
 
+import Navigation from '../Navigation';
 import { useStyles } from './styles';
 
 const Dashboard = ({ pageTitle, children }) => {
@@ -59,7 +60,7 @@ const Dashboard = ({ pageTitle, children }) => {
             {pageTitle}
           </Typography>
           <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
+            <Badge badgeContent={32} max={99} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
@@ -79,6 +80,7 @@ const Dashboard = ({ pageTitle, children }) => {
         </div>
         <Divider />
         <Divider />
+        <Navigation />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />

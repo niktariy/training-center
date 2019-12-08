@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useForm from 'react-hook-form';
+import clsx from 'clsx';
 import { connect } from 'react-redux';
 import { Link as RoterLink } from 'react-router-dom';
-import { userLoginAction } from '../../_actions/auth.actions';
 
 import {
   Avatar,
@@ -16,24 +16,37 @@ import {
   Link,
   Typography,
   Container,
+  CircularProgress,
 } from '@material-ui/core';
 
 import Copyright from '../../_components/Copyright';
 import { history } from '../../_utils/history';
+import { userLogin } from '../../_actions';
 import { useStyles } from './styles';
 
-const Login = ({ userLoginAction, token }) => {
+const Login = ({ userLogin, isUserLoginProcessing, isLoggedIn }) => {
   const { handleSubmit, register, errors } = useForm({
     mode: 'onBlur',
   });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const classes = useStyles();
 
-  const EmailProps = {
-    id: 'email',
-    label: 'Email Address',
+  useEffect(() => {
+    setLoading(isUserLoginProcessing);
+    setSuccess(isLoggedIn);
+  }, [isUserLoginProcessing, isLoggedIn]);
+
+  const buttonClassname = clsx({
+    [classes.buttonSuccess]: success,
+  });
+
+  const UsernameProps = {
+    id: 'username',
+    label: 'Username',
     name: 'username',
-    type: 'email',
-    autoComplete: 'email',
+    type: 'text',
+    autoComplete: 'username',
   };
   const PasswordProps = {
     id: 'password',
@@ -43,15 +56,9 @@ const Login = ({ userLoginAction, token }) => {
     autoComplete: 'current-password',
   };
 
-  useEffect(() => {
-    // TODO: rewrite with document coockie
-    if (sessionStorage.getItem('token') !== null) {
-      history.push('/courses');
-    }
-  });
-
   const onSubmit = values => {
-    userLoginAction(values);
+    setLoading(true);
+    userLogin(values);
   };
 
   return (
@@ -68,15 +75,11 @@ const Login = ({ userLoginAction, token }) => {
             required
             fullWidth
             autoFocus
-            error={errors.email && !!errors.email.message}
-            helperText={errors.email && errors.email.message}
-            inputProps={EmailProps}
+            error={errors.username && !!errors.username.message}
+            helperText={errors.username && errors.username.message}
+            inputProps={UsernameProps}
             inputRef={register({
               required: 'Required',
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: 'invalid email address',
-              },
             })}
           />
           <TextField
@@ -89,10 +92,6 @@ const Login = ({ userLoginAction, token }) => {
             inputProps={PasswordProps}
             inputRef={register({
               required: 'Required',
-              pattern: {
-                message:
-                  'At least 8 digits, 1 uppercase letter, 1 lowercase letter, and 1 number. Can contain special characters',
-              },
             })}
           />
           <FormControlLabel
@@ -106,16 +105,22 @@ const Login = ({ userLoginAction, token }) => {
             }
             label="Remember me"
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            size="large"
-            className={classes.submit}
-          >
-            Sign In
-          </Button>
+          <div className={classes.btnWrapper}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              size="large"
+              disabled={loading}
+              className={buttonClassname}
+            >
+              Sign In
+            </Button>
+            {loading && (
+              <CircularProgress size={24} className={classes.buttonProgress} />
+            )}
+          </div>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
@@ -138,15 +143,18 @@ const Login = ({ userLoginAction, token }) => {
 };
 
 Login.propTypes = {
-  userLoginAction: PropTypes.func.isRequired,
+  userLogin: PropTypes.func.isRequired,
+  isUserLoginProcessing: PropTypes.bool.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => {
-  return { token: state.authReducer.token };
-};
+const mapStateToProps = state => ({
+  isUserLoginProcessing: state.authReducer.isUserLoginProcessing,
+  isLoggedIn: state.authReducer.isLoggedIn,
+});
 
 const mapDispatchToProps = {
-  userLoginAction,
+  userLogin,
 };
 
 export default connect(

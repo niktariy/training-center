@@ -1,3 +1,4 @@
+import { teal, orange } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(theme => ({
@@ -20,7 +21,28 @@ export const useStyles = makeStyles(theme => ({
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
-  submit: {
+  btnWrapper: {
+    position: 'relative',
     margin: theme.spacing(3, 0, 2),
+  },
+  buttonProgress: {
+    color: teal[400],
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
+  },
+  buttonSuccess: {
+    backgroundColor: teal[400],
+    '&:hover': {
+      backgroundColor: teal[700],
+    },
+  },
+  buttonError: {
+    backgroundColor: orange[800],
+    '&:hover': {
+      backgroundColor: orange[900],
+    },
   },
 }));

@@ -9,28 +9,26 @@ export const USER_LOGOUT_REQUEST = 'USER_LOGOUT_REQUEST';
 export const USER_LOGOUT_SUCCESS = 'USER_LOGOUT_SUCCESS';
 export const USER_LOGOUT_FAILURE = 'USER_LOGOUT_FAILURE';
 
-export const userLoginAction = ({ username, password }) => dispatch => {
+const _parseJSON = response => {
+  return response.text().then(function(text) {
+    return text ? JSON.parse(text) : {};
+  });
+};
+
+export const userLogin = ({ username, password }) => dispatch => {
   dispatch({
     type: USER_LOGIN_REQUEST,
   });
 
-  const userData = {
-    username,
-    password,
-  };
-
   userService
-    .login(userData)
-    .then(res => {
+    .login({ username, password })
+    .then(({ headers, status }) => {
       dispatch({
         type: USER_LOGIN_SUCCESS,
-        payload: {
-          token: res.data.token,
-          auth: true,
-        },
+        payload: headers.authorization,
       });
-      sessionStorage.setItem('token', res.data.token);
-      history.push('/courses');
+      sessionStorage.setItem('authToken', headers.authorization);
+      history.push('/profile');
     })
     .catch(error => {
       dispatch({
@@ -40,7 +38,7 @@ export const userLoginAction = ({ username, password }) => dispatch => {
     });
 };
 
-export const userLogoutAction = () => dispatch => {
+const userLogout = () => dispatch => {
   dispatch({
     type: USER_LOGOUT_REQUEST,
   });
@@ -63,5 +61,4 @@ export const userLogoutAction = () => dispatch => {
         payload: error.message,
       });
     });
-  // ;
 };
