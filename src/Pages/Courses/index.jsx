@@ -5,7 +5,7 @@ import { Grid } from '@material-ui/core';
 
 import { history } from '../../_utils/history';
 import { getAllCourses } from '../../_actions/courses.actions';
-import Dashboard from '../../_components/Dashboard';
+import DashboardArea from '../../_components/DashboardArea';
 import CourseList from '../../_components/CourseList';
 
 const Courses = ({ getAllCourses, authToken, courses, coursesLoading }) => {
@@ -17,11 +17,11 @@ const Courses = ({ getAllCourses, authToken, courses, coursesLoading }) => {
   }, [authToken, getAllCourses]);
 
   return (
-    <Dashboard pageTitle="Courses">
+    <DashboardArea pageTitle="Courses">
       <Grid container spacing={3}>
         <CourseList items={courses} isLoading={coursesLoading} />
       </Grid>
-    </Dashboard>
+    </DashboardArea>
   );
 };
 

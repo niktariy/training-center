@@ -5,7 +5,7 @@ import { Grid } from '@material-ui/core';
 
 import { history } from '../../_utils/history';
 import { getCurrentUser } from '../../_actions';
-import Dashboard from '../../_components/Dashboard';
+import DashboardArea from '../../_components/DashboardArea';
 import ProfileArea from '../../_components/ProfileArea';
 // import UserCourseList from '../../_components/UserCourseList';
 
@@ -18,14 +18,14 @@ const UserProfile = ({ authToken, getCurrentUser, userData, userLoading }) => {
   }, [authToken, getCurrentUser]);
 
   return (
-    <Dashboard pageTitle="My profile">
+    <DashboardArea pageTitle="My profile">
       <Grid container spacing={3}>
         <Grid item xs>
           <ProfileArea user={userData} isLoading={userLoading} />
         </Grid>
         <Grid item xs></Grid>
       </Grid>
-    </Dashboard>
+    </DashboardArea>
   );
 };
 

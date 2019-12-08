@@ -33,12 +33,13 @@ const Navigation = () => {
   ];
   return (
     <List role="navigation" component="nav">
-      {navLinks.map(({ icon, name, link }) => (
+      {navLinks.map(({ icon, name, link }, index) => (
         <ListItem
           button
           to={link}
           component={NavLink}
           activeClassName="isActive"
+          key={name + index}
         >
           <ListItemIcon>{icon}</ListItemIcon>
           <ListItemText>{name}</ListItemText>

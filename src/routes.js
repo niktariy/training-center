@@ -6,6 +6,9 @@ import { UserAuthWrapper } from 'redux-auth-wrapper';
 import App from './App';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
+import Dashboard from './Pages/Dashboard';
+import Courses from './Pages/Courses';
+import Calendar from './Pages/Calendar';
 import UserProfile from './Pages/UserProfile';
 import NotFoundPage from './Pages/NotFoundPage.js';
 
@@ -21,7 +24,9 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
     <Route path="login" component={Login} />
+    <Route path="dashboard" component={UserIsAuthenticated(Dashboard)} />
     <Route path="courses" component={UserIsAuthenticated(Courses)} />
+    <Route path="calendar" component={UserIsAuthenticated(Calendar)} />
     <Route path="profile" component={UserIsAuthenticated(UserProfile)} />
     <Route path="*" component={NotFoundPage} />
   </Route>

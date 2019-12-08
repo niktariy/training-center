@@ -20,7 +20,7 @@ import {
 import Navigation from '../Navigation';
 import { useStyles } from './styles';
 
-const Dashboard = ({ pageTitle, children }) => {
+const DashboardArea = ({ pageTitle, children }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
   const handleDrawerOpen = () => {
@@ -92,8 +92,8 @@ const Dashboard = ({ pageTitle, children }) => {
   );
 };
 
-Dashboard.propTypes = {
+DashboardArea.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default Dashboard;
+export default DashboardArea;
