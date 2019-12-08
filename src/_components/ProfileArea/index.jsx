@@ -6,6 +6,7 @@ import {
   Typography,
   Avatar,
   Link,
+  Divider,
 } from '@material-ui/core';
 import {
   EmailTwoTone as EmailTwoToneIcon,
@@ -42,6 +43,7 @@ const ProfileArea = ({ user, isLoading }) => {
               {fullName}
             </Typography>
           </div>
+          <Divider />
           <div className={classes.userLinks}>
             <Link href={`mailto:${user.email}`}>
               <EmailTwoToneIcon size={24} aria-label="email" />
