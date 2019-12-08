@@ -8,8 +8,6 @@ import {
 } from '../_actions/user.actions';
 import createReducer from '../_utils/createReducer';
 
-const uniqueAvatarUrl = id => `https://i.pravatar.cc/150?u=${id}`;
-
 const DEFAULT_USER = {
   id: null,
   firstName: '',
@@ -21,6 +19,7 @@ const DEFAULT_USER = {
 
 const defaultState = {
   isRequestProcessing: false,
+  isCurrentUser: false,
   userData: DEFAULT_USER,
   errorMessage: null,
 };
@@ -33,13 +32,24 @@ export default createReducer(defaultState, (state, action) => ({
   [GET_CURRENT_USER_SUCCESS]: () => ({
     ...state,
     isRequestProcessing: false,
-    userData: {
-      ...action.payload.userData,
-      avatar: uniqueAvatarUrl(action.payload.userData.id),
-    },
+    isCurrentUser: true,
+    userData: action.payload.userData,
   }),
   [GET_CURRENT_USER_FAILURE]: () => ({
     ...state,
     errorMessage: action.payload.error,
+  }),
+  [GET_USER_BY_ID_REQUEST]: () => ({
+    ...state,
+    isRequestProcessing: true,
+  }),
+  [GET_USER_BY_ID_SUCCESS]: () => ({
+    ...state,
+    isRequestProcessing: false,
+    userData: action.payload.userData,
+  }),
+  [GET_USER_BY_ID_FAILURE]: () => ({
+    ...state,
+    isRequestProcessing: false,
   }),
 }));

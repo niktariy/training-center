@@ -1,16 +1,20 @@
-import API, { SECURE_API } from '../_api/config';
+import { SECURE_API } from '../_api/config';
 
-const loginService = userData => API.post('/login', userData);
+const API_URL = 'user_profile';
 
-const logoutService = () => API.post('/logout');
+const getLoggedUser = token => SECURE_API.get(`${API_URL}`);
 
-const getLoggedUser = token => SECURE_API.get('user_profile');
+const getUserProfile = userId => SECURE_API.get(`${API_URL}/${userId}`);
 
-const getUserProfile = userId => SECURE_API.get(`/user_profile/${userId}`);
+const updateLoggedUser = userData =>
+  SECURE_API.put(`${API_URL}/update`, userData);
+
+const updateUserPassword = newPswd =>
+  SECURE_API.put(`${API_URL}/edit_password`, newPswd);
 
 export const userService = {
-  login: loginService,
-  logout: logoutService,
   getCurrentUser: getLoggedUser,
   getUserByID: getUserProfile,
+  updateCurrentUser: updateLoggedUser,
+  updatePassword: updateUserPassword,
 };

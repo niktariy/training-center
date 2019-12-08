@@ -1,5 +1,5 @@
 import { history } from '../_utils/history';
-import { userService } from '../_services';
+import { authService } from '../_services';
 
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
@@ -9,18 +9,12 @@ export const USER_LOGOUT_REQUEST = 'USER_LOGOUT_REQUEST';
 export const USER_LOGOUT_SUCCESS = 'USER_LOGOUT_SUCCESS';
 export const USER_LOGOUT_FAILURE = 'USER_LOGOUT_FAILURE';
 
-const _parseJSON = response => {
-  return response.text().then(function(text) {
-    return text ? JSON.parse(text) : {};
-  });
-};
-
 export const userLogin = ({ username, password }) => dispatch => {
   dispatch({
     type: USER_LOGIN_REQUEST,
   });
 
-  userService
+  authService
     .login({ username, password })
     .then(({ headers, status }) => {
       dispatch({
@@ -38,12 +32,12 @@ export const userLogin = ({ username, password }) => dispatch => {
     });
 };
 
-const userLogout = () => dispatch => {
+export const userLogout = () => dispatch => {
   dispatch({
     type: USER_LOGOUT_REQUEST,
   });
 
-  userService
+  authService
     .logout()
     .then(() => {
       sessionStorage.removeItem('token');
@@ -53,6 +47,7 @@ const userLogout = () => dispatch => {
           token: '',
         },
       });
+      sessionStorage.removeItem('authToken');
       history.push('/');
     })
     .catch(error => {

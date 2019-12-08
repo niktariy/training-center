@@ -3,19 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 
-import { history } from '../../_utils/history';
 import { getCurrentUser } from '../../_actions';
 import DashboardArea from '../../_components/DashboardArea';
 import ProfileArea from '../../_components/ProfileArea';
-// import UserCourseList from '../../_components/UserCourseList';
 
-const UserProfile = ({ authToken, getCurrentUser, userData, userLoading }) => {
+const UserProfile = ({ getCurrentUser, userData, userLoading }) => {
   useEffect(() => {
-    if (sessionStorage.getItem('authToken') === null || authToken === '') {
-      history.push('/');
-    }
     getCurrentUser();
-  }, [authToken, getCurrentUser]);
+  }, [getCurrentUser]);
 
   return (
     <DashboardArea pageTitle="My profile">
@@ -30,14 +25,12 @@ const UserProfile = ({ authToken, getCurrentUser, userData, userLoading }) => {
 };
 
 UserProfile.propTypes = {
-  authToken: PropTypes.string.isRequired,
   getCurrentUser: PropTypes.func.isRequired,
   userData: PropTypes.object.isRequired,
   userLoading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
-  authToken: state.authReducer.authToken,
   userData: state.userReducer.userData,
   userLoading: state.userReducer.isRequestProcessing,
 });

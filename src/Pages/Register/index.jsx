@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useForm from 'react-hook-form';
 import { Link as RoterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -43,22 +43,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Register = props => {
-  const { handleSubmit, register, errors } = useForm();
+  const { handleSubmit, register } = useForm({
+    mode: 'onBlur',
+  });
   const classes = useStyles();
-
-  const EmailProps = {
-    id: 'email',
-    label: 'Email Address',
-    name: 'email',
-    autoComplete: 'email',
-  };
-  const PasswordProps = {
-    id: 'password',
-    label: 'Password',
-    name: 'password',
-    type: 'password',
-    autoComplete: 'current-password',
-  };
 
   const onSubmit = values => {
     console.log(values);
@@ -71,7 +59,7 @@ const Register = props => {
         <Typography component="h1" variant="h4">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -84,6 +72,7 @@ const Register = props => {
                 name="firstName"
                 label="First Name"
                 autoComplete="fname"
+                inputRef={register}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -96,6 +85,7 @@ const Register = props => {
                 name="lastName"
                 label="Last Name"
                 autoComplete="lname"
+                inputRef={register}
               />
             </Grid>
             <Grid item xs={12}>
@@ -107,6 +97,7 @@ const Register = props => {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                inputRef={register}
               />
             </Grid>
             <Grid item xs={12}>
@@ -119,11 +110,18 @@ const Register = props => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                inputRef={register}
               />
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                control={
+                  <Checkbox
+                    value="allowExtraEmails"
+                    color="primary"
+                    inputRef={register}
+                  />
+                }
                 label="I want to receive inspiration, marketing promotions and updates via email."
               />
             </Grid>
@@ -135,12 +133,12 @@ const Register = props => {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            {'Sign Up'}
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
               <Link to={'/'} variant="body2" component={RoterLink}>
-                Already have an account? Sign in
+                {'Already have an account? Sign in'}
               </Link>
             </Grid>
           </Grid>

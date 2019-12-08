@@ -55,6 +55,7 @@ export default createReducer(defaultState, (state, action) => ({
     errorMessage: action.payload.error,
   }),
 
+  // subscribe to course
   [ENROLL_COURSE_REQUEST]: () => ({
     ...state,
     isRequestProcessing: true,
@@ -69,6 +70,7 @@ export default createReducer(defaultState, (state, action) => ({
     errorMessage: action.payload.error,
   }),
 
+  // create new course
   [CREATE_COURSE_REQUEST]: () => ({
     ...state,
     isRequestProcessing: true,
@@ -83,6 +85,7 @@ export default createReducer(defaultState, (state, action) => ({
     errorMessage: action.payload.error,
   }),
 
+  // update course info
   [UPDATE_COURSE_REQUEST]: () => ({
     ...state,
     isRequestProcessing: true,

@@ -31,7 +31,8 @@ const Calendar = () => (
     <Paper>
       <Scheduler data={data}>
         <ViewState currentDate={currentDate} />
-        <WeekView />
+        <WeekView startDayHour={9} endDayHour={18} />
+        <MonthView startDayHour={10} endDayHour={19} />
         <Toolbar />
         <ViewSwitcher />
         <Appointments />

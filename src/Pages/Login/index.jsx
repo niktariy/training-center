@@ -20,7 +20,6 @@ import {
 } from '@material-ui/core';
 
 import Copyright from '../../_components/Copyright';
-import { history } from '../../_utils/history';
 import { userLogin } from '../../_actions';
 import { useStyles } from './styles';
 
@@ -66,7 +65,10 @@ const Login = ({ userLogin, isUserLoginProcessing, isLoggedIn }) => {
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>ui</Avatar>
         <Typography component="h1" variant="h4">
-          Sign in
+          {'Welcome Back!'}
+        </Typography>
+        <Typography component="h2" variant="h6">
+          {'Sign in to use platfrom'}
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
           <TextField
@@ -115,7 +117,7 @@ const Login = ({ userLogin, isUserLoginProcessing, isLoggedIn }) => {
               disabled={loading}
               className={buttonClassname}
             >
-              Sign In
+              {'Sign In'}
             </Button>
             {loading && (
               <CircularProgress size={24} className={classes.buttonProgress} />
@@ -124,12 +126,12 @@ const Login = ({ userLogin, isUserLoginProcessing, isLoggedIn }) => {
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
-                Forgot password?
+                {'Forgot password?'}
               </Link>
             </Grid>
             <Grid item>
               <Link to={'/register'} variant="body2" component={RoterLink}>
-                Don't have an account? Sign Up
+                {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>

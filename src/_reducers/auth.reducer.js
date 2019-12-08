@@ -1,4 +1,3 @@
-import { getCookie } from '../_helpers';
 import {
   USER_LOGIN_FAILURE,
   USER_LOGIN_REQUEST,

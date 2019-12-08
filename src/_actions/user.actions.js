@@ -1,5 +1,7 @@
 import { userService } from '../_services';
 
+const uniqueAvatarCreator = id => `https://i.pravatar.cc/150?u=${id}`;
+
 export const GET_CURRENT_USER_REQUEST = 'GET_CURRENT_USER_REQUEST';
 export const GET_CURRENT_USER_SUCCESS = 'GET_CURRENT_USER_SUCCESS';
 export const GET_CURRENT_USER_FAILURE = 'GET_CURRENT_USER_FAILURE';
@@ -19,12 +21,14 @@ export const getCurrentUser = () => dispatch => {
       dispatch({
         type: GET_CURRENT_USER_SUCCESS,
         payload: {
-          userData: res.data,
+          userData: res.data.map(item => ({
+            ...item,
+            avatar: uniqueAvatarCreator(item.id),
+          })),
         },
       });
     })
     .catch(error => {
-      console.log('err', error, error.request._header);
       dispatch({
         type: GET_CURRENT_USER_FAILURE,
         payload: error.message,
@@ -43,7 +47,10 @@ export const getUserById = userId => dispatch => {
       dispatch({
         type: GET_USER_BY_ID_SUCCESS,
         payload: {
-          userData: res.data,
+          userData: res.data.map(item => ({
+            ...item,
+            avatar: uniqueAvatarCreator(item.id),
+          })),
         },
       });
     })
