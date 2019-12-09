@@ -7,7 +7,7 @@ const headers = {
   // 'Content-Type': 'x-www-form-urlencoded',
 };
 
-export const API_URL = `${CORS_ALLOW_URL}http://318e333d.ngrok.io`;
+export const API_URL = `${CORS_ALLOW_URL}http://9b9cd870.ngrok.io`;
 
 export default axios.create({
   baseURL: API_URL,

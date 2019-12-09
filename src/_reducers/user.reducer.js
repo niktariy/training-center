@@ -9,7 +9,7 @@ import {
 import createReducer from '../_utils/createReducer';
 
 const DEFAULT_USER = {
-  id: null,
+  id: '',
   firstName: '',
   lastName: '',
   email: '',

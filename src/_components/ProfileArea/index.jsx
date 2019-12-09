@@ -27,42 +27,38 @@ const ProfileArea = ({ user, isLoading }) => {
     );
   }, [user]);
 
-  return (
-    <React.Fragment>
-      {isLoading ? (
-        <CircularProgress size={24} />
-      ) : (
-        <Paper className={classes.userInfoBlock}>
-          <div className={classes.userHeader}>
-            <Avatar
-              alt={initails}
-              src={user.avatar}
-              className={classes.userAvatar}
-            />
-            <Typography variant="h4" component="h2">
-              {fullName}
-            </Typography>
-          </div>
-          <Divider />
-          <div className={classes.userLinks}>
-            <Link href={`mailto:${user.email}`}>
-              <EmailTwoToneIcon size={24} aria-label="email" />
-              {user.email}
-            </Link>
-            <Link href={`skype:${user.skype}`}>
-              <CallTwoToneIcon size={24} aria-label="call skype" />
-              {user.skype}
-            </Link>
-          </div>
-        </Paper>
-      )}
-    </React.Fragment>
+  return isLoading ? (
+    <CircularProgress size={24} />
+  ) : (
+    <Paper className={classes.userInfoBlock}>
+      <div className={classes.userHeader}>
+        <Avatar
+          alt={initails}
+          src={user.avatar}
+          className={classes.userAvatar}
+        />
+        <Typography variant="h4" component="h2">
+          {fullName}
+        </Typography>
+      </div>
+      <Divider />
+      <div className={classes.userLinks}>
+        <Link href={`mailto:${user.email}`}>
+          <EmailTwoToneIcon size={24} aria-label="email" />
+          {user.email}
+        </Link>
+        <Link href={`skype:${user.skype}`}>
+          <CallTwoToneIcon size={24} aria-label="call skype" />
+          {user.skype}
+        </Link>
+      </div>
+    </Paper>
   );
 };
 
 ProfileArea.propTypes = {
   user: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.any.isRequired,
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,

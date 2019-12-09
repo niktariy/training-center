@@ -1,6 +1,9 @@
 import { coursesService } from '../_services';
 
-export const GET_ALL_COURSES_REQUEST = 'GET_GET_ALL_COURSES_REQUEST';
+const uniqueImagePlaceholder = id =>
+  `https://picsum.photos/id/100${id}/600/500?blur`;
+
+export const GET_ALL_COURSES_REQUEST = 'GET_ALL_COURSES_REQUEST';
 export const GET_ALL_COURSES_SUCCESS = 'GET_ALL_COURSES_SUCCESS';
 export const GET_ALL_COURSES_FAILURE = 'GET_ALL_COURSES_FAILURE';
 
@@ -27,11 +30,14 @@ export const getAllCourses = () => dispatch => {
 
   coursesService
     .getAllCourses()
-    .then(({ data }) => {
+    .then(res => {
       dispatch({
         type: GET_ALL_COURSES_SUCCESS,
         payload: {
-          courses: data,
+          courses: res.data.map(item => ({
+            ...item,
+            imageUrl: uniqueImagePlaceholder(item.id),
+          })),
         },
       });
     })
@@ -50,11 +56,11 @@ export const getCourseById = courseId => dispatch => {
 
   coursesService
     .getCourseById(courseId)
-    .then(({ data }) => {
+    .then(res => {
       dispatch({
         type: GET_COURSE_BY_ID_SUCCESS,
         payload: {
-          courseData: data,
+          courseData: res.data,
         },
       });
     })

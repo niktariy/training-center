@@ -17,11 +17,21 @@ import {
 } from '../_actions/courses.actions';
 import createReducer from '../_utils/createReducer';
 
+const DEFAULT_COURSE = {
+  id: '',
+  courseName: '',
+  courseDescription: '',
+  courseDuration: '',
+  startDate: '',
+  category: '',
+  imageUrl: 'https://picsum.photos/id/0/600/500',
+};
+
 const defaultState = {
   isRequestProcessing: false,
   courses: [],
   errorMessage: null,
-  singleCourseData: {},
+  singleCourseData: DEFAULT_COURSE,
 };
 
 export default createReducer(defaultState, (state, action) => ({
