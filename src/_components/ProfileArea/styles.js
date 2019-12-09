@@ -7,6 +7,7 @@ export const useStyles = makeStyles(theme => ({
   userHeader: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
   },
   userAvatar: {
     width: 60,

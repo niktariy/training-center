@@ -21,10 +21,10 @@ export const getCurrentUser = () => dispatch => {
       dispatch({
         type: GET_CURRENT_USER_SUCCESS,
         payload: {
-          userData: res.data.map(item => ({
-            ...item,
-            avatar: uniqueAvatarCreator(item.id),
-          })),
+          userData: {
+            ...res.data,
+            avatar: uniqueAvatarCreator(res.data.id),
+          },
         },
       });
     })
@@ -47,10 +47,10 @@ export const getUserById = userId => dispatch => {
       dispatch({
         type: GET_USER_BY_ID_SUCCESS,
         payload: {
-          userData: res.data.map(item => ({
-            ...item,
-            avatar: uniqueAvatarCreator(item.id),
-          })),
+          userData: {
+            ...res.data,
+            avatar: uniqueAvatarCreator(res.data.id),
+          },
         },
       });
     })

@@ -20,7 +20,7 @@ const UserCourseList = ({ items }) => {
           courseDescription,
           courseDuration,
           startDate,
-          courseCategory,
+          category,
           lector,
         }) => (
           <ListItem key={id + courseName}>
@@ -29,7 +29,7 @@ const UserCourseList = ({ items }) => {
             {courseDescription}
             {courseDuration}
             {startDate}
-            {courseCategory}
+            {category}
           </ListItem>
         )
       )}
@@ -45,7 +45,7 @@ UserCourseList.propTypes = {
       courseDescription: PropTypes.string.isRequired,
       courseDuration: PropTypes.number.isRequired,
       startDate: PropTypes.any.isRequired,
-      courseCategory: PropTypes.string.isRequired,
+      category: PropTypes.string.isRequired,
       lector: PropTypes.object.isRequired,
     })
   ).isRequired,

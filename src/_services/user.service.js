@@ -6,6 +6,8 @@ const getLoggedUser = token => SECURE_API.get(`${API_URL}`);
 
 const getUserProfile = userId => SECURE_API.get(`${API_URL}/${userId}`);
 
+const getUserRole = userId => SECURE_API.get(`${API_URL}/${userId}/role`);
+
 const updateLoggedUser = userData =>
   SECURE_API.put(`${API_URL}/update`, userData);
 
