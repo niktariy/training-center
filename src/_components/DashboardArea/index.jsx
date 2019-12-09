@@ -7,20 +7,22 @@ import {
   Toolbar,
   Typography,
   Divider,
+  InputBase,
   IconButton,
   Badge,
-  Container,
 } from '@material-ui/core';
 import {
   Menu as MenuIcon,
+  Search as SearchIcon,
   ChevronLeft as ChevronLeftIcon,
   Notifications as NotificationsIcon,
 } from '@material-ui/icons';
 
 import Navigation from '../Navigation';
+import { renderMainView } from './mainView';
 import { useStyles } from './styles';
 
-const DashboardArea = ({ pageTitle, children }) => {
+const DashboardArea = ({ children }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
   const handleDrawerOpen = () => {
@@ -49,15 +51,20 @@ const DashboardArea = ({ pageTitle, children }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            {pageTitle}
-          </Typography>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </div>
+          <div className={classes.grow} />
           <IconButton color="inherit">
             <Badge badgeContent={32} max={99} color="secondary">
               <NotificationsIcon />
@@ -81,12 +88,7 @@ const DashboardArea = ({ pageTitle, children }) => {
         <Divider />
         <Navigation />
       </Drawer>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          {children}
-        </Container>
-      </main>
+      {renderMainView(children, classes)}
     </div>
   );
 };
