@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { formatCategory } from '../../_utils/stringFormatter';
 
 import {
   Card,
@@ -39,17 +40,15 @@ const CourseCard = ({ courseData }) => {
             {courseDescription}
           </Typography>
           <Typography>{courseDuration} hours</Typography>
-          <Typography>{category}</Typography>
+          <Typography>{formatCategory(category)}</Typography>
           <Typography>{startDate}</Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" variant="outlined" color="primary">
+        <Button variant="outlined" color="primary">
           {'Enroll'}
         </Button>
-        <Button size="small" color="primary">
-          {'Learn More'}
-        </Button>
+        <Button color="primary">{'Learn More'}</Button>
       </CardActions>
     </Card>
   );
