@@ -20,6 +20,7 @@ const DEFAULT_USER = {
 const defaultState = {
   isRequestProcessing: false,
   isCurrentUser: false,
+  currentUserId: '',
   userData: DEFAULT_USER,
   errorMessage: null,
 };
@@ -34,6 +35,7 @@ export default createReducer(defaultState, (state, action) => ({
     isRequestProcessing: false,
     isCurrentUser: true,
     userData: action.payload.userData,
+    currentUserId: action.payload.userData.id,
   }),
   [GET_CURRENT_USER_FAILURE]: () => ({
     ...state,

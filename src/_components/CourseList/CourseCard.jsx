@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { formatCategory } from '../../_utils/stringFormatter';
-
 import {
   Card,
   CardActionArea,
@@ -13,6 +13,8 @@ import {
 } from '@material-ui/core';
 
 const CourseCard = ({ courseData }) => {
+  let { url } = useRouteMatch();
+
   const {
     id,
     courseName,
@@ -25,7 +27,7 @@ const CourseCard = ({ courseData }) => {
 
   return (
     <Card>
-      <CardActionArea>
+      <CardActionArea to={`${url}/${id}`} component={Link}>
         <CardMedia
           image={imageUrl}
           title={courseName}
@@ -45,10 +47,9 @@ const CourseCard = ({ courseData }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button variant="outlined" color="primary">
-          {'Enroll'}
+        <Button color="primary" to={`${url}/${id}`} component={Link}>
+          {'Learn More'}
         </Button>
-        <Button color="primary">{'Learn More'}</Button>
       </CardActions>
     </Card>
   );

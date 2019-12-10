@@ -19,6 +19,7 @@ const App = () => {
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/profile" component={UserProfile} />
         <Route exact path="/courses" component={Courses} />
+        <Route exact path="/courses" component={Courses} />
         <Route exact path="/calendar" component={Calendar} />
       </Switch>
     </Router>
