@@ -29,6 +29,7 @@ const DEFAULT_COURSE = {
 
 const defaultState = {
   isRequestProcessing: false,
+  isGettingCourseProcessing: false,
   courses: [],
   errorMessage: null,
   singleCourseData: DEFAULT_COURSE,
@@ -52,16 +53,16 @@ export default createReducer(defaultState, (state, action) => ({
 
   [GET_COURSE_BY_ID_REQUEST]: () => ({
     ...state,
-    isRequestProcessing: true,
+    isGettingCourseProcessing: true,
   }),
   [GET_COURSE_BY_ID_SUCCESS]: () => ({
     ...state,
-    isRequestProcessing: false,
+    isGettingCourseProcessing: false,
     singleCourseData: action.payload.courseData,
   }),
   [GET_COURSE_BY_ID_FAILURE]: () => ({
     ...state,
-    isRequestProcessing: false,
+    isGettingCourseProcessing: false,
     errorMessage: action.payload.error,
   }),
 

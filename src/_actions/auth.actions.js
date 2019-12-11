@@ -1,6 +1,6 @@
 import { history } from '../_utils/history';
 import { authService } from '../_services';
-import { getCurrentUser, getCurrentUserRole } from './user.actions';
+import { getCurrentUser } from './user.actions';
 
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
@@ -20,13 +20,11 @@ export const userLogin = ({ username, password }) => dispatch => {
     .then(({ headers, status }) => {
       dispatch({
         type: USER_LOGIN_SUCCESS,
-        payload: headers.Authorization,
+        payload: headers.authorization,
       });
-      dispatch(getCurrentUser).then(res => {
-        dispatch(getCurrentUserRole(res.data.id));
-      });
-      sessionStorage.setItem('authToken', headers.Authorization);
-      history.push('/profile');
+      sessionStorage.setItem('authToken', headers.authorization);
+      dispatch(getCurrentUser);
+      history.push('/courses');
     })
     .catch(error => {
       dispatch({

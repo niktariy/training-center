@@ -6,7 +6,7 @@ import CourseCard from './CourseCard';
 import { categories } from '../../constants/categories';
 import { useStyles } from './styles';
 
-const CourseList = ({ items, isLoading }) => {
+const CourseArea = ({ items, isLoading }) => {
   const [courses, setCourses] = useState([]);
   const classes = useStyles();
 
@@ -55,7 +55,7 @@ const CourseList = ({ items, isLoading }) => {
   );
 };
 
-CourseList.propTypes = {
+CourseArea.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -65,13 +65,13 @@ CourseList.propTypes = {
       startDate: PropTypes.any.isRequired,
       category: PropTypes.string.isRequired,
       imageUrl: PropTypes.string.isRequired,
-    })
+    }),
   ).isRequired,
   isLoading: PropTypes.bool,
 };
 
-CourseList.defaultProps = {
+CourseArea.defaultProps = {
   isLoading: false,
 };
 
-export default CourseList;
+export default CourseArea;

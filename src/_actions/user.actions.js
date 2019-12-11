@@ -24,6 +24,7 @@ export const getCurrentUser = () => dispatch => {
   userService
     .getCurrentUser()
     .then(res => {
+      dispatch(getCurrentUserRole(res.data.id));
       dispatch({
         type: GET_CURRENT_USER_SUCCESS,
         payload: {

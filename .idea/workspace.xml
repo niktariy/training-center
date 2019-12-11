@@ -2,38 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28cc6aa3-a480-4368-aa10-0c8064469a78" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Navigation/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/CourseArea/CourseInfo.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/notfound.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Calendar/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Calendar/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/Courses/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Courses/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Dashboard/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Dashboard/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Login/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Login/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Register/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Register/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/UserProfile/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserProfile/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/_actions/auth.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_actions/auth.actions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/_actions/user.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_actions/user.actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_api/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_components/Copyright/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Copyright/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_components/CourseInfo/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseInfo/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_components/CourseList/CourseCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseList/CourseCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_components/CourseList/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseList/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_components/CourseList/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseList/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_components/DashboardArea/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DashboardArea/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_components/DashboardArea/mainView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DashboardArea/mainView.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_components/DashboardArea/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DashboardArea/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_components/Navigation/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_components/PrivateRoute.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PrivateRoute.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_components/ProfileArea/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProfileArea/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_components/ProfileArea/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProfileArea/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_components/UserCourseList/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UserCourseList/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_reducers/user.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_reducers/user.reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_services/auth.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_services/auth.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_services/courses.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_services/courses.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_services/lecturer.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_services/lecturer.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_services/user.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_reducers/courses.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_reducers/courses.reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CourseInfo/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CourseList/CourseCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseArea/CourseCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CourseList/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseArea/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CourseList/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseArea/styles.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +45,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -80,6 +63,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/CourseArea" />
       <recent name="$PROJECT_DIR$/src/_utils" />
     </key>
   </component>
@@ -106,7 +90,8 @@
       <option name="presentableId" value="Default" />
       <updated>1575280976954</updated>
       <workItem from="1575280979625" duration="8677000" />
-      <workItem from="1576045344390" duration="5945000" />
+      <workItem from="1576045344390" duration="6275000" />
+      <workItem from="1576062862367" duration="8217000" />
     </task>
     <servers />
   </component>

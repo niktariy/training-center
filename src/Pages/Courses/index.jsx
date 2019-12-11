@@ -1,32 +1,27 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
-
+import {
+  Switch,
+  Route,
+  Link,
+  useParams,
+  useRouteMatch
+} from "react-router-dom";
 import { getAllCourses } from '../../_actions/courses.actions';
 import DashboardArea from '../../components/DashboardArea';
-import CourseList from '../../components/CourseList';
-import CourseInfo from '../../components/CourseInfo';
+import CourseArea from '../../components/CourseArea';
 
 const Courses = ({ getAllCourses, courses, coursesLoading }) => {
-  let { path } = useRouteMatch();
-
   useEffect(() => {
     getAllCourses();
   }, [getAllCourses]);
 
   return (
-    <DashboardArea pageTitle="Courses">
+    <DashboardArea>
       <Grid container spacing={3}>
-        <Switch>
-          <Route exact path={path}>
-            <CourseList items={courses} isLoading={coursesLoading} />
-          </Route>
-          <Route path={`${path}/:courseId`}>
-            <CourseInfo />
-          </Route>
-        </Switch>
+        <CourseArea items={courses} isLoading={coursesLoading} />
       </Grid>
     </DashboardArea>
   );
