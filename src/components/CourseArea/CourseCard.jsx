@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Link, useRouteMatch,
-} from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { formatCategory } from '../../_utils/stringFormatter';
 import {
   Card,
@@ -48,7 +46,7 @@ const CourseCard = ({ courseData }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button color="primary" to={`${url}${id}`} component={Link}>
+        <Button color="primary" to={`${url}/${id}`} component={Link}>
           {'Learn More'}
         </Button>
       </CardActions>

@@ -24,12 +24,16 @@ const DEFAULT_COURSE = {
   courseDuration: '',
   startDate: '',
   category: '',
+  lecturerId: '',
+  listeners: [],
   imageUrl: 'https://picsum.photos/id/0/600/500',
 };
 
 const defaultState = {
   isRequestProcessing: false,
   isGettingCourseProcessing: false,
+  isSubscribeProcessing: false,
+  isSubsribedUser: false,
   courses: [],
   errorMessage: null,
   singleCourseData: DEFAULT_COURSE,
@@ -69,15 +73,17 @@ export default createReducer(defaultState, (state, action) => ({
   // subscribe to course
   [ENROLL_COURSE_REQUEST]: () => ({
     ...state,
-    isRequestProcessing: true,
+    isSubscribeProcessing: true,
   }),
   [ENROLL_COURSE_SUCCESS]: () => ({
     ...state,
-    isRequestProcessing: false,
+    isSubscribeProcessing: false,
+    isSubsribedUser: true,
   }),
   [ENROLL_COURSE_FAILURE]: () => ({
     ...state,
-    isRequestProcessing: false,
+    isSubscribeProcessing: false,
+    isSubsribedUser: false,
     errorMessage: action.payload.error,
   }),
 

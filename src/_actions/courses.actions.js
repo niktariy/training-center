@@ -1,4 +1,5 @@
 import { coursesService } from '../_services';
+import { getCurrentUser } from './user.actions';
 
 const uniqueImagePlaceholder = id =>
   `https://picsum.photos/id/100${id}/600/500?blur`;
@@ -130,4 +131,12 @@ export const updateCourse = courseData => dispatch => {
         payload: error.message,
       });
     });
+};
+
+export const findUserInListeners = (listeners, userId) => {
+  if (!listeners.length && !userId) {
+    return;
+  }
+  const res = listeners.find(item => item.id === userId);
+  return res !== undefined ? !!Object.keys(res).length : false;
 };
