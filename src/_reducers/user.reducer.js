@@ -4,7 +4,7 @@ import {
   GET_CURRENT_USER_FAILURE,
   GET_USER_BY_ID_REQUEST,
   GET_USER_BY_ID_SUCCESS,
-  GET_USER_BY_ID_FAILURE,
+  GET_USER_BY_ID_FAILURE, GET_USER_ROLE_SUCCESS, GET_USER_ROLE_FAILURE,
 } from '../_actions/user.actions';
 import createReducer from '../_utils/createReducer';
 
@@ -19,9 +19,14 @@ const DEFAULT_USER = {
 
 const defaultState = {
   isRequestProcessing: false,
+
   isCurrentUser: false,
+  currentUser: DEFAULT_USER,
   currentUserId: '',
+  currentUserRole: '',
+
   userData: DEFAULT_USER,
+  userRole: '',
   errorMessage: null,
 };
 
@@ -34,13 +39,23 @@ export default createReducer(defaultState, (state, action) => ({
     ...state,
     isRequestProcessing: false,
     isCurrentUser: true,
-    userData: action.payload.userData,
+    currentUser: action.payload.userData,
     currentUserId: action.payload.userData.id,
   }),
   [GET_CURRENT_USER_FAILURE]: () => ({
     ...state,
     errorMessage: action.payload.error,
   }),
+
+  [GET_USER_ROLE_SUCCESS]: () => ({
+    ...state,
+    currentUserRole: action.payload,
+  }),
+  [GET_USER_ROLE_FAILURE]: () => ({
+    ...state,
+    errorMessage: action.payload,
+  }),
+
   [GET_USER_BY_ID_REQUEST]: () => ({
     ...state,
     isRequestProcessing: true,
@@ -53,5 +68,14 @@ export default createReducer(defaultState, (state, action) => ({
   [GET_USER_BY_ID_FAILURE]: () => ({
     ...state,
     isRequestProcessing: false,
+  }),
+
+  [GET_USER_ROLE_SUCCESS]: () => ({
+    ...state,
+    userRole: action.payload,
+  }),
+  [GET_USER_ROLE_FAILURE]: () => ({
+    ...state,
+    errorMessage: action.payload,
   }),
 }));

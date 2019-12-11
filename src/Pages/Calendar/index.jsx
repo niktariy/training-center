@@ -17,11 +17,10 @@ import {
   Paper,
   Checkbox,
   FormControlLabel,
-  Typography,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
-import DashboardArea from '../../_components/DashboardArea';
+import DashboardArea from '../../components/DashboardArea';
 import { appointments, currentDate } from './data';
 
 const styles = ({ spacing }) => ({
@@ -105,11 +104,6 @@ export default class Demo extends React.PureComponent {
 
     this.onCommitChanges = this.commitChanges.bind(this);
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
-    this.handleUpdateIntervalChange = nextValue => {
-      this.setState({
-        updateInterval: nextValue * 1000,
-      });
-    };
   }
 
   commitChanges({ added, changed, deleted }) {
@@ -145,7 +139,6 @@ export default class Demo extends React.PureComponent {
     const {
       data,
       shadePreviousCells,
-      updateInterval,
       shadePreviousAppointments,
     } = this.state;
 
@@ -160,7 +153,7 @@ export default class Demo extends React.PureComponent {
         </Grid>
 
         <Paper>
-          <Scheduler data={data} height={660}>
+          <Scheduler data={data} >
             <ViewState defaultCurrentDate={currentDate} />
             <EditingState onCommitChanges={this.onCommitChanges} />
 

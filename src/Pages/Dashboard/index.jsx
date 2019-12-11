@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardArea from '../../_components/DashboardArea';
+import DashboardArea from '../../components/DashboardArea';
 
 const Dashboard = () => <DashboardArea pageTitle="">kyky</DashboardArea>;
 

@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 
 import { getCurrentUser } from '../../_actions';
-import DashboardArea from '../../_components/DashboardArea';
-import ProfileArea from '../../_components/ProfileArea';
+import DashboardArea from '../../components/DashboardArea';
+import ProfileArea from '../../components/ProfileArea';
 
 const UserProfile = ({ getCurrentUser, userData, userLoading }) => {
   useEffect(() => {
@@ -18,7 +18,6 @@ const UserProfile = ({ getCurrentUser, userData, userLoading }) => {
         <Grid item xs>
           <ProfileArea user={userData} isLoading={userLoading} />
         </Grid>
-        <Grid item xs></Grid>
       </Grid>
     </DashboardArea>
   );
@@ -41,5 +40,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(UserProfile);

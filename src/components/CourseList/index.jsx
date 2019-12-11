@@ -7,17 +7,12 @@ import { categories } from '../../constants/categories';
 import { useStyles } from './styles';
 
 const CourseList = ({ items, isLoading }) => {
-  const [filterProperty, setFilterProperty] = useState('');
   const [courses, setCourses] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
     setCourses(items);
   }, [items]);
-
-  const filterOptions = categories;
-
-  const handleClick = event => {};
 
   return isLoading ? (
     <CircularProgress size={24} />
@@ -32,7 +27,7 @@ const CourseList = ({ items, isLoading }) => {
           <Button id="all_courses" onClick={() => setCourses(items)}>
             All
           </Button>
-          {filterOptions.map(({ key, name }) => (
+          {categories.map(({ key, name }) => (
             <Button
               key={key}
               id={key}

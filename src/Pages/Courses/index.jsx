@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 
 import { getAllCourses } from '../../_actions/courses.actions';
-import DashboardArea from '../../_components/DashboardArea';
-import CourseList from '../../_components/CourseList';
-import CourseInfo from '../../_components/CourseInfo';
+import DashboardArea from '../../components/DashboardArea';
+import CourseList from '../../components/CourseList';
+import CourseInfo from '../../components/CourseInfo';
 
 const Courses = ({ getAllCourses, courses, coursesLoading }) => {
-  let { path, url } = useRouteMatch();
+  let { path } = useRouteMatch();
 
   useEffect(() => {
     getAllCourses();

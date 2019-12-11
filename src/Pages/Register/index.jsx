@@ -15,7 +15,7 @@ import {
   Container,
 } from '@material-ui/core';
 
-import Copyright from '../../_components/Copyright';
+import Copyright from '../../components/Copyright';
 
 const useStyles = makeStyles(theme => ({
   '@global': {

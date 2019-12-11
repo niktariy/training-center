@@ -5,7 +5,6 @@ import {
   Drawer,
   AppBar,
   Toolbar,
-  Typography,
   Divider,
   InputBase,
   IconButton,
@@ -46,7 +45,7 @@ const DashboardArea = ({ children }) => {
             onClick={handleDrawerOpen}
             className={clsx(
               classes.menuButton,
-              open && classes.menuButtonHidden
+              open && classes.menuButtonHidden,
             )}
           >
             <MenuIcon />
@@ -65,7 +64,7 @@ const DashboardArea = ({ children }) => {
             />
           </div>
           <div className={classes.grow} />
-          <IconButton color="inherit">
+          <IconButton color="inherit" aria-label="Expand notifications">
             <Badge badgeContent={32} max={99} color="secondary">
               <NotificationsIcon />
             </Badge>

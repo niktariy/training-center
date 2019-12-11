@@ -1,4 +1,4 @@
-import { SECURE_API } from '../_api/config';
+import { SECURE_API } from '../api/config';
 
 const API_URL = 'course';
 

@@ -1,4 +1,4 @@
-import { SECURE_API } from '../_api/config';
+import { SECURE_API } from '../api/config';
 
 const API_URL = 'user_profile';
 
@@ -17,6 +17,7 @@ const updateUserPassword = newPswd =>
 export const userService = {
   getCurrentUser: getLoggedUser,
   getUserByID: getUserProfile,
+  getRoleByID: getUserRole,
   updateCurrentUser: updateLoggedUser,
   updatePassword: updateUserPassword,
 };

@@ -19,7 +19,7 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 
-import Copyright from '../../_components/Copyright';
+import Copyright from '../../components/Copyright';
 import { userLogin } from '../../_actions';
 import { useStyles } from './styles';
 

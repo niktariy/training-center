@@ -5,25 +5,44 @@ import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import * as serviceWorker from './serviceWorker';
-
 import rootReducer from './_reducers';
 
 import App from './App';
 
 const theme = createMuiTheme({
   palette: {
+    common: {
+      black: 'rgba(31, 17, 76, 1)',
+      white: '#fff',
+    },
+    background: {
+      paper: '#fff',
+      'default': '#fafafa',
+    },
     primary: {
-      main: '#7e57c2',
+      light: 'rgba(221, 227, 252, 1)',
+      main: 'rgba(160, 168, 246, 1)',
+      dark: 'rgba(105, 113, 237, 1)',
+      contrastText: 'rgba(22, 18, 51, 1)',
     },
     secondary: {
-      light: '#f6a5c0',
-      main: '#f48fb1',
-      dark: '#f381a7',
-      contrastText: '#000',
+      light: 'rgba(226, 250, 246, 1)',
+      main: 'rgba(0, 209, 180, 1)',
+      dark: 'rgba(4, 167, 144, 1)',
+      contrastText: '#fff',
     },
-  },
-  typography: {
-    useNextVariants: true,
+    error: {
+      light: 'rgba(252, 195, 168, 1)',
+      main: 'rgba(239, 106, 86, 1)',
+      dark: 'rgba(236, 71, 46, 1)',
+      contrastText: '#fff',
+    },
+    text: {
+      primary: 'rgb(45,37,77)',
+      secondary: 'rgba(53, 45, 112, 1)',
+      disabled: 'rgba(224, 223, 235, 1)',
+      hint: 'rgba(87, 80, 143, 1)',
+    },
   },
 });
 
@@ -31,7 +50,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(thunk)),
 );
 
 render(
@@ -40,7 +59,7 @@ render(
       <App />
     </MuiThemeProvider>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

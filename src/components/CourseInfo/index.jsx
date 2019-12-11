@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -14,9 +14,9 @@ const CourseInfo = ({
 }) => {
   const { courseId } = useParams();
 
-  useState(() => {
+  useEffect(() => {
     getCourseById(courseId);
-  }, [getCourseById]);
+  }, [courseId, getCourseById]);
 
   const {
     id,
@@ -25,7 +25,6 @@ const CourseInfo = ({
     courseDuration,
     startDate,
     category,
-    imageUrl,
   } = courseData;
 
   const handleClick = () => {
