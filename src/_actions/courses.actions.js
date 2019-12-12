@@ -16,6 +16,10 @@ export const ENROLL_COURSE_REQUEST = 'ENROLL_COURSE_REQUEST';
 export const ENROLL_COURSE_SUCCESS = 'ENROLL_COURSE_SUCCESS';
 export const ENROLL_COURSE_FAILURE = 'ENROLL_COURSE_FAILURE';
 
+export const LEAVE_COURSE_REQUEST = 'LEAVE_COURSE_REQUEST';
+export const LEAVE_COURSE_SUCCESS = 'LEAVE_COURSE_SUCCESS';
+export const LEAVE_COURSE_FAILURE = 'LEAVE_COURSE_FAILURE';
+
 export const CREATE_COURSE_REQUEST = 'CREATE_COURSE_REQUEST';
 export const CREATE_COURSE_SUCCESS = 'CREATE_COURSE_SUCCESS';
 export const CREATE_COURSE_FAILURE = 'CREATE_COURSE_FAILURE';
@@ -88,6 +92,26 @@ export const enrollCourse = courseId => dispatch => {
     .catch(error => {
       dispatch({
         type: ENROLL_COURSE_FAILURE,
+        payload: error.message,
+      });
+    });
+};
+
+export const leaveCourse = courseId => dispatch => {
+  dispatch({
+    type: LEAVE_COURSE_REQUEST,
+  });
+
+  coursesService
+    .leaveCourse(courseId)
+    .then(() => {
+      dispatch({
+        type: LEAVE_COURSE_SUCCESS,
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: LEAVE_COURSE_FAILURE,
         payload: error.message,
       });
     });

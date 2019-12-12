@@ -8,6 +8,9 @@ import {
   ENROLL_COURSE_REQUEST,
   ENROLL_COURSE_SUCCESS,
   ENROLL_COURSE_FAILURE,
+  LEAVE_COURSE_REQUEST,
+  LEAVE_COURSE_SUCCESS,
+  LEAVE_COURSE_FAILURE,
   CREATE_COURSE_REQUEST,
   CREATE_COURSE_SUCCESS,
   CREATE_COURSE_FAILURE,
@@ -85,6 +88,22 @@ export default createReducer(defaultState, (state, action) => ({
     isSubscribeProcessing: false,
     isSubsribedUser: false,
     errorMessage: action.payload.error,
+  }),
+
+  // unsubscribe
+  [LEAVE_COURSE_REQUEST]: () => ({
+    ...state,
+    isSubscribeProcessing: true,
+  }),
+  [LEAVE_COURSE_SUCCESS]: () => ({
+    ...state,
+    isSubscribeProcessing: false,
+    isSubsribedUser: false,
+  }),
+  [LEAVE_COURSE_FAILURE]: () => ({
+    ...state,
+    isSubscribeProcessing: false,
+    isSubsribedUser: true,
   }),
 
   // create new course

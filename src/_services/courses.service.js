@@ -9,6 +9,9 @@ const getCourseById = courseId => SECURE_API.get(`${API_URL}/${courseId}`);
 const enrollCourse = courseId =>
   SECURE_API.post(`${API_URL}/${courseId}/subscribe`);
 
+const leaveCourse = courseId =>
+  SECURE_API.post(`${API_URL}/${courseId}/unsubscribe`);
+
 const createCourse = courseData =>
   SECURE_API.post(`${API_URL}/create`, courseData);
 
@@ -19,6 +22,7 @@ export const coursesService = {
   getAllCourses,
   getCourseById,
   enrollCourse,
+  leaveCourse,
   createCourse,
   updateCourse,
 };

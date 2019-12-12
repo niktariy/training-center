@@ -6,7 +6,12 @@ import { Link as RouterLink, useParams } from 'react-router-dom';
 import { Breadcrumbs, Grid, Link, CircularProgress } from '@material-ui/core';
 
 import DashboardArea from '../DashboardArea';
-import { getCurrentUser, getCourseById, enrollCourse } from '../../_actions';
+import {
+  getCurrentUser,
+  getCourseById,
+  enrollCourse,
+  leaveCourse,
+} from '../../_actions';
 import { formatCategory } from '../../_utils/stringFormatter';
 import { Paper, Button, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
@@ -17,13 +22,14 @@ const CourseInfo = ({
   getCurrentUser,
   getCourseById,
   enrollCourse,
+  leaveCourse,
   isLoading,
   isSubscribing,
   isSubscribed,
 }) => {
   const classes = useStyles();
   const { courseId } = useParams();
-  const [subscribing, setSubscribing] = useState(false);
+  const [processing, setPropcessing] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
 
   const {
@@ -41,10 +47,14 @@ const CourseInfo = ({
     enrollCourse(id);
   };
 
+  const handleLeaveClick = () => {
+    leaveCourse(id);
+  };
+
   useEffect(() => {
     getCurrentUser();
     getCourseById(courseId);
-    setSubscribing(isSubscribing);
+    setPropcessing(isSubscribing);
   }, [
     courseId,
     currentUserId,
@@ -91,16 +101,17 @@ const CourseInfo = ({
             {lecturerId !== currentUserId &&
             new Date(startDate).getTime() > new Date().getTime() ? (
               <div className={classes.btnWrapper}>
+                {isSubscribed ? 'Changed your mind?' : null}
                 <Button
                   size="large"
-                  variant="outlined"
+                  variant={isSubscribed ? 'outlined' : 'contained'}
                   color="primary"
-                  disabled={subscribing || isSubscribed}
-                  onClick={isSubscribed ? undefined : handleEnrollClick}
+                  disabled={processing}
+                  onClick={isSubscribed ? handleLeaveClick : handleEnrollClick}
                 >
                   {isSubscribed ? 'Unsubscribe' : 'Enroll'}
                 </Button>
-                {subscribing && (
+                {processing && (
                   <CircularProgress
                     size={24}
                     className={classes.buttonProgress}
@@ -120,12 +131,15 @@ const CourseInfo = ({
 CourseInfo.propTypes = {
   courseData: PropTypes.object.isRequired,
   currentUserId: PropTypes.any.isRequired,
-  getCurrentUser: PropTypes.func.isRequired,
-  getCourseById: PropTypes.func.isRequired,
-  enrollCourse: PropTypes.func.isRequired,
+
   isLoading: PropTypes.bool.isRequired,
   isSubscribing: PropTypes.bool.isRequired,
   isSubscribed: PropTypes.bool.isRequired,
+
+  getCurrentUser: PropTypes.func.isRequired,
+  getCourseById: PropTypes.func.isRequired,
+  enrollCourse: PropTypes.func.isRequired,
+  leaveCourse: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -157,6 +171,7 @@ const mapDispatchToProps = {
   getCurrentUser,
   getCourseById,
   enrollCourse,
+  leaveCourse,
 };
 
 export default connect(
