@@ -12,7 +12,6 @@ import {
   enrollCourse,
   leaveCourse,
 } from '../../_actions';
-import { formatCategory } from '../../_utils/stringFormatter';
 import { Paper, Button, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 
@@ -26,11 +25,11 @@ const CourseInfo = ({
   isLoading,
   isSubscribing,
   isSubscribed,
+  errorMessage
 }) => {
   const classes = useStyles();
   const { courseId } = useParams();
-  const [processing, setPropcessing] = useState(false);
-  const [subscribed, setSubscribed] = useState(false);
+  const [processing, setProcessing] = useState(false);
 
   const {
     id,
@@ -52,9 +51,14 @@ const CourseInfo = ({
   };
 
   useEffect(() => {
-    getCurrentUser();
+    if (!!currentUserId.length) {
+      getCurrentUser();
+    }
     getCourseById(courseId);
-    setPropcessing(isSubscribing);
+
+    return () => {
+      setProcessing(isSubscribing);
+    };
   }, [
     courseId,
     currentUserId,
@@ -123,6 +127,7 @@ const CourseInfo = ({
             )}
           </Paper>
         )}
+        {errorMessage}
       </Grid>
     </DashboardArea>
   );
@@ -140,12 +145,15 @@ CourseInfo.propTypes = {
   getCourseById: PropTypes.func.isRequired,
   enrollCourse: PropTypes.func.isRequired,
   leaveCourse: PropTypes.func.isRequired,
+
+  errorMessage: PropTypes.any
 };
 
 const mapStateToProps = state => {
   const coursesReducer = state.coursesReducer;
   const currentUserId = state.userReducer.currentUserId;
   const courseData = coursesReducer.singleCourseData;
+
   function findUserInListeners(listeners, userId) {
     if (!listeners.length && !userId) {
       return;
@@ -153,9 +161,10 @@ const mapStateToProps = state => {
     const res = listeners.find(item => item.id === userId);
     return res !== undefined ? !!Object.keys(res).length : false;
   }
+
   const isCurrentUserSubscribed = findUserInListeners(
     courseData.listeners,
-    currentUserId
+    currentUserId,
   );
 
   return {
@@ -164,6 +173,7 @@ const mapStateToProps = state => {
     isSubscribed: isCurrentUserSubscribed || false,
     isLoading: coursesReducer.isGettingCourseProcessing,
     isSubscribing: coursesReducer.isSubscribeProcessing,
+    errorMessage: coursesReducer.errorMessage,
   };
 };
 
@@ -176,5 +186,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(CourseInfo);

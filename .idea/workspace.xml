@@ -2,20 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28cc6aa3-a480-4368-aa10-0c8064469a78" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/CourseArea/CourseInfo.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/notfound.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Courses/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Courses/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/UserProfile/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/UserProfile/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_actions/auth.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_actions/auth.actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_actions/user.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_actions/user.actions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/_reducers/courses.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_reducers/courses.reducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CourseInfo/index.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CourseList/CourseCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseArea/CourseCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CourseList/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseArea/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CourseList/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseArea/styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CourseArea/CourseInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseArea/CourseInfo.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +81,8 @@
       <updated>1575280976954</updated>
       <workItem from="1575280979625" duration="8677000" />
       <workItem from="1576045344390" duration="6275000" />
-      <workItem from="1576062862367" duration="8217000" />
+      <workItem from="1576062862367" duration="8289000" />
+      <workItem from="1576166069074" duration="1989000" />
     </task>
     <servers />
   </component>
@@ -103,13 +94,17 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2470" y="186" width="800" height="675" key="#ESLint/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576045592309" />
-    <state x="2551" y="111" width="648" height="828" key="find.popup" timestamp="1576045562456">
+    <state x="2551" y="111" width="787" height="828" key="find.popup" timestamp="1576167075355">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2551" y="111" width="648" height="828" key="find.popup/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576045562456" />
-    <state x="2538" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1576050159299">
+    <state x="2551" y="111" width="787" height="828" key="find.popup/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576167075355" />
+    <state x="2539" y="240" key="run.anything.popup" timestamp="1576167935007">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2538" y="231" width="672" height="678" key="search.everywhere.popup/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576050159299" />
+    <state x="2539" y="240" key="run.anything.popup/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576167935007" />
+    <state x="2538" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1576167212951">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2538" y="231" width="672" height="678" key="search.everywhere.popup/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576167212951" />
   </component>
 </project>

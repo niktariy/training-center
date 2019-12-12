@@ -36,7 +36,7 @@ const defaultState = {
   isRequestProcessing: false,
   isGettingCourseProcessing: false,
   isSubscribeProcessing: false,
-  isSubsribedUser: false,
+  isSubscribedUser: false,
   courses: [],
   errorMessage: null,
   singleCourseData: DEFAULT_COURSE,
@@ -81,12 +81,12 @@ export default createReducer(defaultState, (state, action) => ({
   [ENROLL_COURSE_SUCCESS]: () => ({
     ...state,
     isSubscribeProcessing: false,
-    isSubsribedUser: true,
+    isSubscribedUser: true,
   }),
   [ENROLL_COURSE_FAILURE]: () => ({
     ...state,
     isSubscribeProcessing: false,
-    isSubsribedUser: false,
+    isSubscribedUser: false,
     errorMessage: action.payload.error,
   }),
 
@@ -98,12 +98,13 @@ export default createReducer(defaultState, (state, action) => ({
   [LEAVE_COURSE_SUCCESS]: () => ({
     ...state,
     isSubscribeProcessing: false,
-    isSubsribedUser: false,
+    isSubscribedUser: false,
   }),
   [LEAVE_COURSE_FAILURE]: () => ({
     ...state,
     isSubscribeProcessing: false,
-    isSubsribedUser: true,
+    isSubscribedUser: true,
+    errorMessage: action.payload.error,
   }),
 
   // create new course
