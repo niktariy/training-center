@@ -1,5 +1,4 @@
 import { coursesService } from '../_services';
-import { getCurrentUser } from './user.actions';
 
 const uniqueImagePlaceholder = id =>
   `https://picsum.photos/id/100${id}/600/500?blur`;
@@ -137,13 +136,13 @@ export const createCourse = courseData => dispatch => {
     });
 };
 
-export const updateCourse = courseData => dispatch => {
+export const updateCourse = (courseId, courseData) => dispatch => {
   dispatch({
     type: UPDATE_COURSE_REQUEST,
   });
 
   coursesService
-    .updateCourse(courseData)
+    .updateCourse(courseId, courseData)
     .then(() => {
       dispatch({
         type: UPDATE_COURSE_SUCCESS,

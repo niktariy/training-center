@@ -6,7 +6,7 @@ import CourseCard from './CourseCard';
 import { categories } from '../../constants/categories';
 import { useStyles } from './styles';
 
-const CourseArea = ({ items, isLoading }) => {
+const CoursesGrid = ({ items, isLoading }) => {
   const [courses, setCourses] = useState([]);
   const classes = useStyles();
 
@@ -55,7 +55,7 @@ const CourseArea = ({ items, isLoading }) => {
   );
 };
 
-CourseArea.propTypes = {
+CoursesGrid.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -70,8 +70,8 @@ CourseArea.propTypes = {
   isLoading: PropTypes.bool,
 };
 
-CourseArea.defaultProps = {
+CoursesGrid.defaultProps = {
   isLoading: false,
 };
 
-export default CourseArea;
+export default CoursesGrid;

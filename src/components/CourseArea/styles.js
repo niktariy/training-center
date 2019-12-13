@@ -18,4 +18,11 @@ export const useStyles = makeStyles(theme => ({
     marginTop: -12,
     marginLeft: -12,
   },
+  buttonSuccess: {
+    backgroundColor: teal[400],
+  },
+  courseCreatorForm: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
 }));

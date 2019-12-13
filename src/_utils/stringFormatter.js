@@ -1,5 +1,7 @@
 import { categories } from '../constants/categories';
 
 export const formatCategory = categoryKey => {
-  return categories.find(category => category.key === categoryKey).name;
+  if (!categoryKey.length) return;
+  const item = categories.find(category => category.key === categoryKey);
+  return Object.keys(item).length ? item.name : categoryKey;
 };

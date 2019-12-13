@@ -2,10 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28cc6aa3-a480-4368-aa10-0c8064469a78" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Pages/CourseCreator/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Pages/CourseUpdater/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/_utils/sortData.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/CourseArea/CourseList.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/CourseArea/FormCourse.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/CourseArea/FormCourseCreator.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/CourseArea/FormCourseUpdater.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants/courseCreatorFields.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Courses/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Courses/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Login/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Login/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_actions/courses.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_actions/courses.actions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/_reducers/courses.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_reducers/courses.reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_services/courses.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_services/courses.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_utils/stringFormatter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_utils/stringFormatter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CourseArea/CourseInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseArea/CourseInfo.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CourseArea/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseArea/CoursesGrid.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CourseArea/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseArea/styles.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +32,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JSX" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -50,9 +68,11 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/Forms/CourseCreatorForm" />
       <recent name="$PROJECT_DIR$/src/components/CourseArea" />
       <recent name="$PROJECT_DIR$/src/_utils" />
     </key>
@@ -82,7 +102,7 @@
       <workItem from="1575280979625" duration="8677000" />
       <workItem from="1576045344390" duration="6275000" />
       <workItem from="1576062862367" duration="8289000" />
-      <workItem from="1576166069074" duration="1989000" />
+      <workItem from="1576166069074" duration="19980000" />
     </task>
     <servers />
   </component>
@@ -94,17 +114,37 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2470" y="186" width="800" height="675" key="#ESLint/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576045592309" />
-    <state x="2551" y="111" width="787" height="828" key="find.popup" timestamp="1576167075355">
+    <state x="2519" y="296" width="702" height="456" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog" timestamp="1576249052980">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2551" y="111" width="787" height="828" key="find.popup/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576167075355" />
+    <state x="2519" y="296" width="702" height="456" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576249052980" />
+    <state width="1887" height="257" key="GridCell.Tab.0.bottom" timestamp="1576236269044">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1887" height="257" key="GridCell.Tab.0.bottom/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576236269044" />
+    <state width="1887" height="257" key="GridCell.Tab.0.center" timestamp="1576236269043">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1887" height="257" key="GridCell.Tab.0.center/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576236269043" />
+    <state width="1887" height="257" key="GridCell.Tab.0.left" timestamp="1576236269043">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1887" height="257" key="GridCell.Tab.0.left/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576236269043" />
+    <state width="1887" height="257" key="GridCell.Tab.0.right" timestamp="1576236269044">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1887" height="257" key="GridCell.Tab.0.right/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576236269043" />
+    <state x="2551" y="111" width="787" height="828" key="find.popup" timestamp="1576236359683">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2551" y="111" width="787" height="828" key="find.popup/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576236359683" />
     <state x="2539" y="240" key="run.anything.popup" timestamp="1576167935007">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2539" y="240" key="run.anything.popup/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576167935007" />
-    <state x="2538" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1576167212951">
+    <state x="2538" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1576235477059">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2538" y="231" width="672" height="678" key="search.everywhere.popup/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576167212951" />
+    <state x="2538" y="231" width="672" height="678" key="search.everywhere.popup/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576235477059" />
   </component>
 </project>

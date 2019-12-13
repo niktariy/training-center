@@ -72,29 +72,29 @@ const Login = ({ userLogin, isUserLoginProcessing, isLoggedIn }) => {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
           <TextField
+            {...UsernameProps}
+            inputRef={register({
+              required: 'Required',
+            })}
             variant="outlined"
             margin="normal"
+            error={errors.username && !!errors.username.message}
+            helperText={errors.username && errors.username.message}
             required
             fullWidth
             autoFocus
-            error={errors.username && !!errors.username.message}
-            helperText={errors.username && errors.username.message}
-            inputProps={UsernameProps}
+          />
+          <TextField
+            {...PasswordProps}
             inputRef={register({
               required: 'Required',
             })}
-          />
-          <TextField
+            error={errors.password && !!errors.password.message}
+            helperText={errors.password && errors.password.message}
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            error={errors.password && !!errors.password.message}
-            helperText={errors.password && errors.password.message}
-            inputProps={PasswordProps}
-            inputRef={register({
-              required: 'Required',
-            })}
           />
           <FormControlLabel
             control={
@@ -131,7 +131,7 @@ const Login = ({ userLogin, isUserLoginProcessing, isLoggedIn }) => {
             </Grid>
             <Grid item>
               <Link to={'/register'} variant="body2" component={RoterLink}>
-                {"Don't have an account? Sign Up"}
+                {'Don\'t have an account? Sign Up'}
               </Link>
             </Grid>
           </Grid>
@@ -161,5 +161,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Login);

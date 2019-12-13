@@ -15,8 +15,8 @@ const leaveCourse = courseId =>
 const createCourse = courseData =>
   SECURE_API.post(`${API_URL}/create`, courseData);
 
-const updateCourse = courseData =>
-  SECURE_API.put(`${API_URL}/update/${courseData.id}`, courseData);
+const updateCourse = (courseId, courseData) =>
+  SECURE_API.put(`${API_URL}/${courseId}/update`, courseData);
 
 export const coursesService = {
   getAllCourses,

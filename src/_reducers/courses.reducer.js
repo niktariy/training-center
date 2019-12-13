@@ -34,9 +34,18 @@ const DEFAULT_COURSE = {
 
 const defaultState = {
   isRequestProcessing: false,
+
   isGettingCourseProcessing: false,
+
   isSubscribeProcessing: false,
   isSubscribedUser: false,
+
+  isCourseCreated: false,
+  isCourseCreationProgress: false,
+
+  isCourseUpdatingProgress: false,
+  isCourseUpdated: false,
+
   courses: [],
   errorMessage: null,
   singleCourseData: DEFAULT_COURSE,
@@ -110,30 +119,34 @@ export default createReducer(defaultState, (state, action) => ({
   // create new course
   [CREATE_COURSE_REQUEST]: () => ({
     ...state,
-    isRequestProcessing: true,
+    isCourseCreationProgress: true,
   }),
   [CREATE_COURSE_SUCCESS]: () => ({
     ...state,
-    isRequestProcessing: false,
+    isCourseCreationProgress: false,
+    isCourseCreated: true,
   }),
   [CREATE_COURSE_FAILURE]: () => ({
     ...state,
-    isRequestProcessing: false,
+    isCourseCreationProgress: false,
+    isCourseCreated: false,
     errorMessage: action.payload.error,
   }),
 
   // update course info
   [UPDATE_COURSE_REQUEST]: () => ({
     ...state,
-    isRequestProcessing: true,
+    isCourseUpdatingProgress: true,
   }),
   [UPDATE_COURSE_SUCCESS]: () => ({
     ...state,
-    isRequestProcessing: false,
+    isCourseUpdatingProgress: false,
+    isCourseUpdated: true,
   }),
   [UPDATE_COURSE_FAILURE]: () => ({
     ...state,
-    isRequestProcessing: false,
+    isCourseUpdatingProgress: false,
+    isCourseUpdated: false,
     errorMessage: action.payload.error,
   }),
 }));
