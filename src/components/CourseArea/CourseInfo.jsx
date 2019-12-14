@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Link as RouterLink, useParams } from 'react-router-dom';
-import { Breadcrumbs, Grid, Link, CircularProgress } from '@material-ui/core';
+import {
+  Breadcrumbs,
+  Grid,
+  Link,
+  CircularProgress,
+  Box,
+} from '@material-ui/core';
 
 import { formatCategory } from '../../_utils/stringFormatter';
 import DashboardArea from '../DashboardArea';
@@ -54,13 +60,16 @@ const CourseInfo = ({
     if (!currentUserId.length) {
       getCurrentUser();
     }
-    getCourseById(courseId);
+    if (!courseData.id.length) {
+      getCourseById(courseId);
+    }
     return () => {
       setProcessing(isSubscribing);
     };
   }, [
+    courseData.id.length,
+    currentUserId.length,
     courseId,
-    currentUserId,
     getCourseById,
     getCurrentUser,
     isSubscribed,
@@ -86,59 +95,62 @@ const CourseInfo = ({
           <CircularProgress size={24} />
         ) : (
           <Paper>
-            <Typography gutterBottom variant="h4" component="h2">
-              {courseName}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {courseDescription}
-            </Typography>
-            {courseDuration && <Typography>{courseDuration} hours</Typography>}
-            <Typography>{formatCategory(category)}</Typography>
-            <Typography>{startDate}</Typography>
-
-            {listeners.map(listener => (
-              <Typography key={listener.id + 'a'}>
-                {listener.firstName}
+            <Box p={3}>
+              <Typography gutterBottom variant="h4" component="h2">
+                {courseName}
               </Typography>
-            ))}
+              <Typography variant="body2" color="textSecondary" component="p">
+                {courseDescription}
+              </Typography>
+              {courseDuration && (
+                <Typography>{courseDuration} hours</Typography>
+              )}
+              <Typography>{formatCategory(category)}</Typography>
+              <Typography>{startDate}</Typography>
 
-            {new Date(startDate).getTime() > new Date().getTime() ? (
-              lecturerId === currentUserId ? (
-                <Button
-                  size="large"
-                  variant="contained"
-                  color="secondary"
-                  to={`/course/edit/${courseId}`}
-                  disabled={processing}
-                  component={RouterLink}
-                >
-                  {'Edit course'}
-                </Button>
-              ) : (
-                <div className={classes.btnWrapper}>
-                  {isSubscribed ? 'Changed your mind?' : null}
+              {listeners.map(listener => (
+                <Typography key={listener.id + 'a'}>
+                  {listener.firstName}
+                </Typography>
+              ))}
+              {new Date(startDate).getTime() > new Date().getTime() ? (
+                lecturerId === currentUserId ? (
                   <Button
                     size="large"
-                    variant={isSubscribed ? 'outlined' : 'contained'}
+                    variant="contained"
                     color="secondary"
+                    to={`/course/edit/${courseId}`}
                     disabled={processing}
-                    onClick={
-                      isSubscribed ? handleLeaveClick : handleEnrollClick
-                    }
+                    component={RouterLink}
                   >
-                    {isSubscribed ? 'Unsubscribe' : 'Enroll'}
+                    {'Edit course'}
                   </Button>
-                  {processing && (
-                    <CircularProgress
-                      size={24}
-                      className={classes.buttonProgress}
-                    />
-                  )}
-                </div>
-              )
-            ) : (
-              'Course is already started or ended'
-            )}
+                ) : (
+                  <div className={classes.btnWrapper}>
+                    {isSubscribed ? 'Changed your mind?' : null}
+                    <Button
+                      size="large"
+                      variant={isSubscribed ? 'outlined' : 'contained'}
+                      color="secondary"
+                      disabled={processing}
+                      onClick={
+                        isSubscribed ? handleLeaveClick : handleEnrollClick
+                      }
+                    >
+                      {isSubscribed ? 'Unsubscribe' : 'Enroll'}
+                    </Button>
+                    {processing && (
+                      <CircularProgress
+                        size={24}
+                        className={classes.buttonProgress}
+                      />
+                    )}
+                  </div>
+                )
+              ) : (
+                'Course is already started or ended'
+              )}
+            </Box>
           </Paper>
         )}
       </Grid>
