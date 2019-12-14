@@ -9,6 +9,7 @@ export const useStyles = makeStyles(theme => ({
   btnWrapper: {
     position: 'relative',
     margin: theme.spacing(3, 0, 2),
+    display: 'flex',
   },
   buttonProgress: {
     color: teal[400],

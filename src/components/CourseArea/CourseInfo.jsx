@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Link as RouterLink, useParams } from 'react-router-dom';
 import { Breadcrumbs, Grid, Link, CircularProgress } from '@material-ui/core';
 
+import { formatCategory } from '../../_utils/stringFormatter';
 import DashboardArea from '../DashboardArea';
 import {
   getCurrentUser,
@@ -16,16 +17,15 @@ import { Paper, Button, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 
 const CourseInfo = ({
-  courseData,
   currentUserId,
+  courseData,
+  isLoading,
+  isSubscribing,
+  isSubscribed,
   getCurrentUser,
   getCourseById,
   enrollCourse,
   leaveCourse,
-  isLoading,
-  isSubscribing,
-  isSubscribed,
-  errorMessage
 }) => {
   const classes = useStyles();
   const { courseId } = useParams();
@@ -51,11 +51,10 @@ const CourseInfo = ({
   };
 
   useEffect(() => {
-    if (!!currentUserId.length) {
+    if (!currentUserId.length) {
       getCurrentUser();
     }
     getCourseById(courseId);
-
     return () => {
       setProcessing(isSubscribing);
     };
@@ -83,7 +82,7 @@ const CourseInfo = ({
             {courseName}
           </Link>
         </Breadcrumbs>
-        {isLoading ? (
+        {isLoading && !id.length ? (
           <CircularProgress size={24} />
         ) : (
           <Paper>
@@ -93,41 +92,55 @@ const CourseInfo = ({
             <Typography variant="body2" color="textSecondary" component="p">
               {courseDescription}
             </Typography>
-            <Typography>{courseDuration} hours</Typography>
-            <Typography>{category}</Typography>
+            {courseDuration && <Typography>{courseDuration} hours</Typography>}
+            <Typography>{formatCategory(category)}</Typography>
             <Typography>{startDate}</Typography>
-            <Typography>{lecturerId}</Typography>
+
             {listeners.map(listener => (
               <Typography key={listener.id + 'a'}>
                 {listener.firstName}
               </Typography>
             ))}
-            {lecturerId !== currentUserId &&
-            new Date(startDate).getTime() > new Date().getTime() ? (
-              <div className={classes.btnWrapper}>
-                {isSubscribed ? 'Changed your mind?' : null}
+
+            {new Date(startDate).getTime() > new Date().getTime() ? (
+              lecturerId === currentUserId ? (
                 <Button
                   size="large"
-                  variant={isSubscribed ? 'outlined' : 'contained'}
-                  color="primary"
+                  variant="contained"
+                  color="secondary"
+                  to={`/course/edit/${courseId}`}
                   disabled={processing}
-                  onClick={isSubscribed ? handleLeaveClick : handleEnrollClick}
+                  component={RouterLink}
                 >
-                  {isSubscribed ? 'Unsubscribe' : 'Enroll'}
+                  {'Edit course'}
                 </Button>
-                {processing && (
-                  <CircularProgress
-                    size={24}
-                    className={classes.buttonProgress}
-                  />
-                )}
-              </div>
+              ) : (
+                <div className={classes.btnWrapper}>
+                  {isSubscribed ? 'Changed your mind?' : null}
+                  <Button
+                    size="large"
+                    variant={isSubscribed ? 'outlined' : 'contained'}
+                    color="secondary"
+                    disabled={processing}
+                    onClick={
+                      isSubscribed ? handleLeaveClick : handleEnrollClick
+                    }
+                  >
+                    {isSubscribed ? 'Unsubscribe' : 'Enroll'}
+                  </Button>
+                  {processing && (
+                    <CircularProgress
+                      size={24}
+                      className={classes.buttonProgress}
+                    />
+                  )}
+                </div>
+              )
             ) : (
-              ''
+              'Course is already started or ended'
             )}
           </Paper>
         )}
-        {errorMessage}
       </Grid>
     </DashboardArea>
   );
@@ -145,8 +158,6 @@ CourseInfo.propTypes = {
   getCourseById: PropTypes.func.isRequired,
   enrollCourse: PropTypes.func.isRequired,
   leaveCourse: PropTypes.func.isRequired,
-
-  errorMessage: PropTypes.any
 };
 
 const mapStateToProps = state => {
@@ -164,16 +175,15 @@ const mapStateToProps = state => {
 
   const isCurrentUserSubscribed = findUserInListeners(
     courseData.listeners,
-    currentUserId,
+    currentUserId
   );
 
   return {
     currentUserId,
     courseData,
-    isSubscribed: isCurrentUserSubscribed || false,
     isLoading: coursesReducer.isGettingCourseProcessing,
     isSubscribing: coursesReducer.isSubscribeProcessing,
-    errorMessage: coursesReducer.errorMessage,
+    isSubscribed: isCurrentUserSubscribed || false,
   };
 };
 
@@ -186,5 +196,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(CourseInfo);

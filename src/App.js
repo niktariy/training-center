@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
 import 'typeface-roboto';
 import { CssBaseline } from '@material-ui/core';
 import { history } from './_utils/history';
@@ -30,7 +26,7 @@ const App = () => {
         <Route exact path="/courses" component={Courses} />
         <Route exact path="/courses/:courseId" component={CourseInfo} />
         <Route exact path="/course/create" component={CourseCreator} />
-        <Route exact path="/course/update/:courseId" component={CourseUpdater} />
+        <Route exact path="/course/edit/:courseId" component={CourseUpdater} />
         <Route exact path="/calendar" component={Calendar} />
         <Route component={Notfound} />
       </Switch>
