@@ -7,7 +7,7 @@ import {
   GET_USER_BY_ID_FAILURE,
   GET_USER_ROLE_SUCCESS,
   GET_USER_ROLE_FAILURE,
-} from '../_actions/user.actions';
+} from '../_actions';
 import createReducer from '../_utils/createReducer';
 
 const DEFAULT_USER = {

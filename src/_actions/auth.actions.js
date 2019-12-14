@@ -35,27 +35,6 @@ export const userLogin = ({ username, password }) => dispatch => {
 };
 
 export const userLogout = () => dispatch => {
-  dispatch({
-    type: USER_LOGOUT_REQUEST,
-  });
-
-  authService
-    .logout()
-    .then(() => {
-      localStorage.removeItem('token');
-      dispatch({
-        type: USER_LOGOUT_SUCCESS,
-        payload: {
-          token: '',
-        },
-      });
-      localStorage.removeItem('authToken');
-      history.push('/');
-    })
-    .catch(error => {
-      dispatch({
-        type: USER_LOGOUT_FAILURE,
-        payload: error.message,
-      });
-    });
+  localStorage.removeItem('authToken');
+  history.push('/');
 };

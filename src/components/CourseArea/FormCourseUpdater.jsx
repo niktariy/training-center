@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useForm from 'react-hook-form';
 import { connect } from 'react-redux';
-import { addDays, format } from 'date-fns';
+import { addDays, addYears, format } from 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import clsx from 'clsx';
-import { useParams } from 'react-router-dom';
 import {
   Button,
   TextField,
@@ -18,23 +17,26 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-import { getCourseById, updateCourse } from '../../_actions';
 import { fields } from '../../constants/courseCreatorFields';
 import { categories } from '../../constants/categories';
 import { useStyles } from './styles';
-import { formatCategory } from '../../_utils/stringFormatter';
 
 const FormCourseUpdater = ({
+  courseId,
   courseData,
-  getCourseById,
-  isCourseCreationProgress,
-  isCourseCreated,
   updateCourse,
+  isCourseUpdatingProgress,
+  isCourseCreated,
 }) => {
-  const { courseId } = useParams();
   const { courseName, courseDescription, startDate, category } = courseData;
   const { handleSubmit, register, getValues, setValue } = useForm({
     mode: 'onBlur',
+    defaultValues: {
+      courseName: courseName,
+      courseDescription: courseDescription,
+      category: category,
+      startDate: startDate,
+    },
   });
   const [courseCategory, setCourseCategory] = useState(category);
   const [selectedDate, setSelectedDate] = useState(startDate);
@@ -44,21 +46,15 @@ const FormCourseUpdater = ({
   const classes = useStyles();
 
   useEffect(() => {
-    getCourseById(courseId);
-    setSelectedDate(new Date(courseData.startDate));
-
-    setLoading(isCourseCreationProgress);
+    setLoading(isCourseUpdatingProgress);
     setSuccess(isCourseCreated);
 
     register({ name: 'category', type: 'text', required: true });
     register({ name: 'startDate', type: 'text', required: true });
-    // setCourseCategory(courseData.category);
-    // setSelectedDate(courseData.startDate);
   }, [
-    isCourseCreationProgress,
+    isCourseUpdatingProgress,
     isCourseCreated,
     register,
-    getCourseById,
     courseId,
     courseData,
     setValue,
@@ -66,6 +62,7 @@ const FormCourseUpdater = ({
 
   const handleSelectChange = e => {
     setCourseCategory(e.target.value);
+    setValue('category', e.target.value);
   };
 
   const handleDateChange = date => {
@@ -77,12 +74,9 @@ const FormCourseUpdater = ({
     [classes.buttonSuccess]: success,
   });
 
-  const values = getValues();
-
   const onSubmit = () => {
-    debugger;
     setLoading(true);
-    updateCourse(courseId, values);
+    updateCourse(courseId, getValues());
   };
 
   return (
@@ -92,7 +86,7 @@ const FormCourseUpdater = ({
         className={classes.courseCreatorForm}
       >
         <Typography variant="h5" component="h2">
-          Create new course
+          {'Update course'}
         </Typography>
         <TextField
           {...fields.CourseNameProps}
@@ -100,7 +94,6 @@ const FormCourseUpdater = ({
             required: 'Required',
           })}
           InputLabelProps={{ shrink: true }}
-          defaultValue={courseName}
           margin="normal"
         />
         <TextField
@@ -109,14 +102,13 @@ const FormCourseUpdater = ({
             required: 'Required',
           })}
           InputLabelProps={{ shrink: true }}
-          defaultValue={courseDescription}
           margin="normal"
           multiline
         />
         <TextField
           {...fields.CourseCategoryProps}
           InputLabelProps={{ shrink: true }}
-          value={courseCategory}
+          defaultValue={courseCategory}
           onChange={handleSelectChange}
           margin="normal"
           select
@@ -131,8 +123,10 @@ const FormCourseUpdater = ({
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
             {...fields.StartDateProps}
-            defaultValue={selectedDate}
+            value={selectedDate}
             onChange={handleDateChange}
+            minDate={addDays(new Date(), 7)}
+            maxDate={addYears(new Date(), 2)}
             disablePast
             disableToolbar
             variant="inline"
@@ -164,25 +158,19 @@ const FormCourseUpdater = ({
 };
 
 FormCourseUpdater.propTypes = {
+  courseId: PropTypes.string.isRequired,
   courseData: PropTypes.object.isRequired,
   isCourseUpdatingProgress: PropTypes.bool.isRequired,
   isCourseUpdated: PropTypes.bool.isRequired,
-  getCourseById: PropTypes.func.isRequired,
   updateCourse: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  courseData: state.coursesReducer.singleCourseData,
   isCourseUpdatingProgress: state.coursesReducer.isCourseUpdatingProgress,
   isCourseUpdated: state.coursesReducer.isCourseUpdated,
 });
 
-const mapDispatchToProps = {
-  getCourseById,
-  updateCourse,
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  {}
 )(FormCourseUpdater);

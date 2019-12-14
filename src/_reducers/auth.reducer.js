@@ -5,7 +5,7 @@ import {
   USER_LOGOUT_FAILURE,
   USER_LOGOUT_REQUEST,
   USER_LOGOUT_SUCCESS,
-} from '../_actions/auth.actions';
+} from '../_actions';
 import createReducer from '../_utils/createReducer';
 
 const token = localStorage.getItem('authToken') || '';
