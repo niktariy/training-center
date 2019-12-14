@@ -16,6 +16,20 @@ export const GET_USER_BY_ID_FAILURE = 'GET_USER_BY_ID_FAILURE';
 export const GET_USER_ROLE_SUCCESS = 'GET_USER_ROLE_SUCCESS';
 export const GET_USER_ROLE_FAILURE = 'GET_USER_ROLE_FAILURE';
 
+export const getCurrentUserRole = userId => dispatch => {
+  userService
+    .getRoleByID(userId)
+    .then(res => {
+      dispatch({
+        type: GET_CURRENT_USER_ROLE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(error => {
+      dispatch({ type: GET_CURRENT_USER_ROLE_FAILURE, payload: error.message });
+    });
+};
+
 export const getCurrentUser = () => dispatch => {
   dispatch({
     type: GET_CURRENT_USER_REQUEST,
@@ -24,7 +38,6 @@ export const getCurrentUser = () => dispatch => {
   userService
     .getCurrentUser()
     .then(res => {
-      dispatch(getCurrentUserRole(res.data.id));
       dispatch({
         type: GET_CURRENT_USER_SUCCESS,
         payload: {
@@ -43,22 +56,22 @@ export const getCurrentUser = () => dispatch => {
     });
 };
 
-export const getCurrentUserRole = userId => dispatch => {
-  userService.getRoleByID(userId).then(res => {
+export const getRoleByID = userId => dispatch => {
+  userService
+    .getRoleByID(userId)
+    .then(res => {
       dispatch({
-        type: GET_CURRENT_USER_ROLE_SUCCESS,
+        type: GET_USER_ROLE_SUCCESS,
         payload: res.data,
       });
-    },
-  ).catch(error => {
-    dispatch({ type: GET_CURRENT_USER_ROLE_FAILURE, payload: error.message });
-  });
+    })
+    .catch(error => {
+      dispatch({ type: GET_USER_ROLE_FAILURE, payload: error.message });
+    });
 };
 
 export const getUserById = userId => dispatch => {
-  dispatch({
-    type: GET_USER_BY_ID_REQUEST,
-  });
+  dispatch({ type: GET_USER_BY_ID_REQUEST });
 
   userService
     .getUserByID(userId)
@@ -79,16 +92,4 @@ export const getUserById = userId => dispatch => {
         payload: error.message,
       });
     });
-};
-
-export const getRoleByID = userId => dispatch => {
-  userService.getRoleByID(userId).then(res => {
-      dispatch({
-        type: GET_USER_ROLE_SUCCESS,
-        payload: res.data,
-      });
-    },
-  ).catch(error => {
-    dispatch({ type: GET_USER_ROLE_FAILURE, payload: error.message });
-  });
 };

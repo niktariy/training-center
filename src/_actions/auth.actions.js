@@ -22,7 +22,7 @@ export const userLogin = ({ username, password }) => dispatch => {
         type: USER_LOGIN_SUCCESS,
         payload: headers.authorization,
       });
-      sessionStorage.setItem('authToken', headers.authorization);
+      localStorage.setItem('authToken', headers.authorization);
       dispatch(getCurrentUser);
       history.push('/courses');
     })
@@ -42,14 +42,14 @@ export const userLogout = () => dispatch => {
   authService
     .logout()
     .then(() => {
-      sessionStorage.removeItem('token');
+      localStorage.removeItem('token');
       dispatch({
         type: USER_LOGOUT_SUCCESS,
         payload: {
           token: '',
         },
       });
-      sessionStorage.removeItem('authToken');
+      localStorage.removeItem('authToken');
       history.push('/');
     })
     .catch(error => {

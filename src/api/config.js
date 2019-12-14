@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const cors_api_host = 'cors-anywhere.herokuapp.com';
 const cors_api_url = 'https://' + cors_api_host + '/';
-const ngrok_server_number = '19f3b247';
+const ngrok_server_number = 'ccd5a85b';
 
 const headers = {
   'Content-Type': 'application/json',
@@ -17,12 +17,10 @@ export default axios.create({
   headers,
 });
 
-const authHeader = sessionStorage.getItem('authToken');
-
 export const SECURE_API = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: authHeader,
+    Authorization: localStorage.getItem('authToken'),
   },
 });

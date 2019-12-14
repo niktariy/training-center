@@ -4,7 +4,9 @@ import {
   GET_CURRENT_USER_FAILURE,
   GET_USER_BY_ID_REQUEST,
   GET_USER_BY_ID_SUCCESS,
-  GET_USER_BY_ID_FAILURE, GET_USER_ROLE_SUCCESS, GET_USER_ROLE_FAILURE,
+  GET_USER_BY_ID_FAILURE,
+  GET_USER_ROLE_SUCCESS,
+  GET_USER_ROLE_FAILURE,
 } from '../_actions/user.actions';
 import createReducer from '../_utils/createReducer';
 
@@ -14,6 +16,7 @@ const DEFAULT_USER = {
   lastName: '',
   email: '',
   skype: '',
+  role: '',
   avatar: 'https://i.pravatar.cc/150?img=69',
 };
 

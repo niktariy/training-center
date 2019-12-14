@@ -8,7 +8,7 @@ import {
 } from '../_actions/auth.actions';
 import createReducer from '../_utils/createReducer';
 
-const token = sessionStorage.getItem('authToken') || '';
+const token = localStorage.getItem('authToken') || '';
 
 const defaultState = {
   isLoggedIn: !!token,

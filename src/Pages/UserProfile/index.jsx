@@ -1,51 +1,108 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Grid } from '@material-ui/core';
+import { Grid, Paper, Divider, Typography } from '@material-ui/core';
 
-import { getCurrentUser } from '../../_actions';
+import {
+  getCurrentUser,
+  getCurrentUserRole,
+  getLecturerCourses,
+  getListenerCourses,
+} from '../../_actions';
 import DashboardArea from '../../components/DashboardArea';
 import ProfileArea from '../../components/ProfileArea';
+import CourseList from '../../components/CourseArea/CourseList';
 
-const UserProfile = ({ getCurrentUser, userData, userRole, userLoading }) => {
-  useEffect(() => {
-    getCurrentUser();
-  }, [getCurrentUser]);
-
+function generateCourses(isLoading, courses, isForLector = false) {
   return (
-    <DashboardArea pageTitle="My profile">
-      <Grid container spacing={3}>
-        <Grid item xs>
-          <ProfileArea user={userData} isLoading={userLoading} />
-        </Grid>
-      </Grid>
-    </DashboardArea>
+    <Grid item xs={12}>
+      <Typography variant="h4">
+        {isForLector ? 'My created courses' : 'My courses'}
+      </Typography>
+      {isLoading ? (
+        'Loading'
+      ) : courses.length ? (
+        <Paper>
+          <CourseList courses={courses} />
+        </Paper>
+      ) : (
+        <Typography>
+          {isForLector
+            ? 'You have not created any course yet'
+            : 'You are not sibscribe to any course yet'}
+        </Typography>
+      )}
+    </Grid>
   );
-};
+}
+
+class UserProfile extends React.Component {
+  componentDidMount() {
+    this.props.getCurrentUser();
+    this.props.getLecturerCourses();
+    this.props.getListenerCourses();
+  }
+
+  render() {
+    const {
+      userData,
+      isUserLoading,
+      lecturerCourses,
+      listenerCourses,
+      isLecturerCoursesLoading,
+      isListenerCoursesLoading,
+    } = this.props;
+    return (
+      <DashboardArea pageTitle="My profile">
+        <Grid container spacing={3}>
+          <Grid item xs>
+            <ProfileArea user={userData} isLoading={isUserLoading} />
+          </Grid>
+          {userData.role == 'ROLE_LECTURER' &&
+            generateCourses(isLecturerCoursesLoading, lecturerCourses, true)}
+          {generateCourses(isListenerCoursesLoading, listenerCourses)}
+        </Grid>
+      </DashboardArea>
+    );
+  }
+}
 
 UserProfile.propTypes = {
-  getCurrentUser: PropTypes.func.isRequired,
   userData: PropTypes.object.isRequired,
-  userLoading: PropTypes.bool.isRequired,
+  isUserLoading: PropTypes.bool.isRequired,
+  lecturerCourses: PropTypes.array.isRequired,
+  listenerCourses: PropTypes.array.isRequired,
+
+  getCurrentUser: PropTypes.func.isRequired,
+  getLecturerCourses: PropTypes.func.isRequired,
+  getListenerCourses: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
   const userReducer = state.userReducer;
+  const coursesReducer = state.coursesReducer;
   const isCurrentUser = userReducer.isCurrentUser;
-  const userData = isCurrentUser ? userReducer.currentUser : userReducer.userData;
-  const userRole = isCurrentUser ? userReducer.currentUserRole : userReducer.userRole;
+
+  const userData = isCurrentUser
+    ? userReducer.currentUser
+    : userReducer.userData;
   return {
     userData,
-    userRole,
-    userLoading: userReducer.isRequestProcessing,
+    isUserLoading: userReducer.isRequestProcessing,
+    lecturerCourses: coursesReducer.lecturerCourses,
+    listenerCourses: coursesReducer.listenerCourses,
+    isLecturerCoursesLoading: coursesReducer.isGettingLecturerCourses,
+    isListenerCoursesLoading: coursesReducer.isGettingListenerCourses,
   };
 };
 
 const mapDispatchToProps = {
   getCurrentUser,
+  getLecturerCourses,
+  getListenerCourses,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(UserProfile);

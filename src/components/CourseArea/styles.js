@@ -25,4 +25,10 @@ export const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  visuallyHidden: {
+    visibility: 'hidden',
+    opacity: 0,
+    height: 0,
+    width: 0,
+  },
 }));

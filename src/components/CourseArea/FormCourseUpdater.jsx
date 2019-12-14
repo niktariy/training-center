@@ -24,37 +24,48 @@ import { categories } from '../../constants/categories';
 import { useStyles } from './styles';
 import { formatCategory } from '../../_utils/stringFormatter';
 
-const FormCourseUpdater = ({ courseData, getCourseById, isCourseCreationProgress, isCourseCreated, updateCourse }) => {
+const FormCourseUpdater = ({
+  courseData,
+  getCourseById,
+  isCourseCreationProgress,
+  isCourseCreated,
+  updateCourse,
+}) => {
   const { courseId } = useParams();
+  const { courseName, courseDescription, startDate, category } = courseData;
   const { handleSubmit, register, getValues, setValue } = useForm({
     mode: 'onBlur',
   });
-  const [selectedDate, setSelectedDate] = useState(addDays(new Date(), 7));
+  const [courseCategory, setCourseCategory] = useState(category);
+  const [selectedDate, setSelectedDate] = useState(startDate);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-
-  const {
-    courseName,
-    courseDescription,
-    startDate,
-    category,
-  } = courseData;
 
   const classes = useStyles();
 
   useEffect(() => {
     getCourseById(courseId);
-    setSelectedDate(new Date(startDate));
+    setSelectedDate(new Date(courseData.startDate));
 
     setLoading(isCourseCreationProgress);
     setSuccess(isCourseCreated);
 
     register({ name: 'category', type: 'text', required: true });
     register({ name: 'startDate', type: 'text', required: true });
-  }, [isCourseCreationProgress, isCourseCreated, register, getCourseById, courseId, startDate]);
+    // setCourseCategory(courseData.category);
+    // setSelectedDate(courseData.startDate);
+  }, [
+    isCourseCreationProgress,
+    isCourseCreated,
+    register,
+    getCourseById,
+    courseId,
+    courseData,
+    setValue,
+  ]);
 
-  const handleSelectChange = category => {
-    setValue('category', category.target.value);
+  const handleSelectChange = e => {
+    setCourseCategory(e.target.value);
   };
 
   const handleDateChange = date => {
@@ -69,76 +80,87 @@ const FormCourseUpdater = ({ courseData, getCourseById, isCourseCreationProgress
   const values = getValues();
 
   const onSubmit = () => {
-    debugger
+    debugger;
     setLoading(true);
     updateCourse(courseId, values);
   };
 
-  return courseData &&
-    <form onSubmit={handleSubmit(onSubmit)} className={classes.courseCreatorForm}>
-      <Typography variant="h5" component="h2">Create new course</Typography>
-      <TextField
-        {...fields.CourseNameProps}
-        inputRef={register({
-          required: 'Required',
-        })}
-        value={courseName}
-        margin="normal"
-      />
-      <TextField
-        {...fields.CourseDescriptionProps}
-        inputRef={register({
-          required: 'Required',
-        })}
-        value={courseDescription}
-        margin="normal"
-        multiline
-      />
-      <TextField
-        {...fields.CourseCategoryProps}
-        defaultValue={category}
-        onChange={handleSelectChange}
-        margin="normal"
-        select
-        helperText="Please select course category"
+  return (
+    courseData && (
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={classes.courseCreatorForm}
       >
-        {categories.map(item => (
-          <MenuItem key={item.key + item.name} value={item.key}>
-            {item.name}
-          </MenuItem>
-        ))}
-      </TextField>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <KeyboardDatePicker
-          {...fields.StartDateProps}
-          value={selectedDate}
-          onChange={handleDateChange}
-          disablePast
-          disableToolbar
-          variant="inline"
+        <Typography variant="h5" component="h2">
+          Create new course
+        </Typography>
+        <TextField
+          {...fields.CourseNameProps}
+          inputRef={register({
+            required: 'Required',
+          })}
+          InputLabelProps={{ shrink: true }}
+          defaultValue={courseName}
           margin="normal"
-          KeyboardButtonProps={{
-            'aria-label': 'Select course start date',
-          }}
         />
-      </MuiPickersUtilsProvider>
-      <div className={classes.btnWrapper}>
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          size="large"
-          disabled={loading}
-          className={buttonClassname}
+        <TextField
+          {...fields.CourseDescriptionProps}
+          inputRef={register({
+            required: 'Required',
+          })}
+          InputLabelProps={{ shrink: true }}
+          defaultValue={courseDescription}
+          margin="normal"
+          multiline
+        />
+        <TextField
+          {...fields.CourseCategoryProps}
+          InputLabelProps={{ shrink: true }}
+          value={courseCategory}
+          onChange={handleSelectChange}
+          margin="normal"
+          select
+          helperText="Please select course category"
         >
-          {'Update & Publish'}
-        </Button>
-        {loading && (
-          <CircularProgress size={24} className={classes.buttonProgress} />
-        )}
-      </div>
-    </form>;
+          {categories.map(item => (
+            <MenuItem key={item.key + item.name} value={item.key}>
+              {item.name}
+            </MenuItem>
+          ))}
+        </TextField>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            {...fields.StartDateProps}
+            defaultValue={selectedDate}
+            onChange={handleDateChange}
+            disablePast
+            disableToolbar
+            variant="inline"
+            margin="normal"
+            KeyboardButtonProps={{
+              'aria-label': 'Select course start date',
+            }}
+          />
+        </MuiPickersUtilsProvider>
+        <div className={classes.btnWrapper}>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            size="large"
+            disabled={loading}
+            className={buttonClassname}
+          >
+            {'Update & Publish'}
+          </Button>
+          {loading && (
+            <CircularProgress size={24} className={classes.buttonProgress} />
+          )}
+        </div>
+      </form>
+    )
+  );
 };
 
 FormCourseUpdater.propTypes = {
@@ -160,4 +182,7 @@ const mapDispatchToProps = {
   updateCourse,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormCourseUpdater);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FormCourseUpdater);

@@ -64,6 +64,7 @@ ProfileArea.propTypes = {
     email: PropTypes.string.isRequired,
     skype: PropTypes.string.isRequired,
     avatar: PropTypes.string.isRequired,
+    role: PropTypes.string,
   }).isRequired,
   isLoading: PropTypes.bool,
 };

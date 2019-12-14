@@ -17,7 +17,13 @@ import {
   UPDATE_COURSE_REQUEST,
   UPDATE_COURSE_SUCCESS,
   UPDATE_COURSE_FAILURE,
-} from '../_actions/courses.actions';
+  GET_LECTURER_COURSES_REQUEST,
+  GET_LECTURER_COURSES_SUCCESS,
+  GET_LECTURER_COURSES_FAILURE,
+  GET_LISTENER_COURSES_REQUEST,
+  GET_LISTENER_COURSES_SUCCESS,
+  GET_LISTENER_COURSES_FAILURE,
+} from '../_actions/coursesActionTypes';
 import createReducer from '../_utils/createReducer';
 
 const DEFAULT_COURSE = {
@@ -34,19 +40,22 @@ const DEFAULT_COURSE = {
 
 const defaultState = {
   isRequestProcessing: false,
-
   isGettingCourseProcessing: false,
+  isGettingLecturerCourses: false,
+  isGettingListenerCourses: false,
 
   isSubscribeProcessing: false,
   isSubscribedUser: false,
 
-  isCourseCreated: false,
   isCourseCreationProgress: false,
+  isCourseCreated: false,
 
   isCourseUpdatingProgress: false,
   isCourseUpdated: false,
 
   courses: [],
+  lecturerCourses: [],
+  listenerCourses: [],
   errorMessage: null,
   singleCourseData: DEFAULT_COURSE,
 };
@@ -147,6 +156,35 @@ export default createReducer(defaultState, (state, action) => ({
     ...state,
     isCourseUpdatingProgress: false,
     isCourseUpdated: false,
+    errorMessage: action.payload.error,
+  }),
+
+  [GET_LECTURER_COURSES_REQUEST]: () => ({
+    ...state,
+    isGettingLecturerCourses: true,
+  }),
+  [GET_LECTURER_COURSES_SUCCESS]: () => ({
+    ...state,
+    isGettingLecturerCourses: false,
+    lecturerCourses: action.payload.courses,
+  }),
+  [GET_LECTURER_COURSES_FAILURE]: () => ({
+    ...state,
+    isGettingLecturerCourses: false,
+    errorMessage: action.payload.error,
+  }),
+  [GET_LISTENER_COURSES_REQUEST]: () => ({
+    ...state,
+    isGettingListenerCourses: true,
+  }),
+  [GET_LISTENER_COURSES_SUCCESS]: () => ({
+    ...state,
+    isGettingListenerCourses: false,
+    listenerCourses: action.payload.courses,
+  }),
+  [GET_LISTENER_COURSES_FAILURE]: () => ({
+    ...state,
+    isGettingListenerCourses: false,
     errorMessage: action.payload.error,
   }),
 }));

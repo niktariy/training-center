@@ -26,7 +26,7 @@ const CourseCard = ({ courseData }) => {
 
   return (
     <Card>
-      <CardActionArea to={`/courses/3`} component={Link}>
+      <CardActionArea to={`${url}/${id}`} component={Link}>
         <CardMedia
           image={imageUrl}
           title={courseName}
