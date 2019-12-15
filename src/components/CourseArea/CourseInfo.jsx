@@ -13,6 +13,8 @@ import {
 
 import { formatCategory } from '../../_utils/stringFormatter';
 import DashboardArea from '../DashboardArea';
+import LessonsShedule from '../Lessons/LessonsShedule';
+
 import {
   getCurrentUser,
   getCourseById,
@@ -156,6 +158,9 @@ const CourseInfo = ({
               </Box>
             </Paper>
           )}
+        </Grid>
+        <Grid item xs={12}>
+          <LessonsShedule courseId={courseId} />
         </Grid>
       </Grid>
     </DashboardArea>

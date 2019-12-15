@@ -51,11 +51,11 @@ export const getLessonInfo = lessonId => dispatch => {
     });
 };
 
-export const createLesson = lessonData => dispatch => {
+export const createLesson = (courseId, lessonData) => dispatch => {
   dispatch({ type: CREATE_LESSON_REQUEST });
 
   lessonService
-    .createLesson(lessonData)
+    .createLesson(courseId, lessonData)
     .then(res => {
       dispatch({ type: CREATE_LESSON_SUCCESS });
     })

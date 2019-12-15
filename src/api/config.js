@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const cors_api_host = 'cors-anywhere.herokuapp.com';
 const cors_api_url = 'https://' + cors_api_host + '/';
-const ngrok_server_number = 'dd492b3e';
+const ngrok_server_number = '26bb8ddd';
 
 const headers = {
   'Content-Type': 'application/json',

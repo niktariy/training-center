@@ -4,7 +4,7 @@ import useForm from 'react-hook-form';
 import clsx from 'clsx';
 import { connect } from 'react-redux';
 import { Link as RoterLink } from 'react-router-dom';
-
+import { history } from '../../_utils/history';
 import {
   Avatar,
   Button,
@@ -32,8 +32,12 @@ const Login = ({ userLogin, isUserLoginProcessing, isLoggedIn }) => {
   const classes = useStyles();
 
   useEffect(() => {
-    setLoading(isUserLoginProcessing);
-    setSuccess(isLoggedIn);
+    if (localStorage.getItem('authToken')) {
+      history.push('/courses');
+    } else {
+      setLoading(isUserLoginProcessing);
+      setSuccess(isLoggedIn);
+    }
   }, [isUserLoginProcessing, isLoggedIn]);
 
   const buttonClassname = clsx({
@@ -131,7 +135,7 @@ const Login = ({ userLogin, isUserLoginProcessing, isLoggedIn }) => {
             </Grid>
             <Grid item>
               <Link to={'/register'} variant="body2" component={RoterLink}>
-                {'Don\'t have an account? Sign Up'}
+                {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>
@@ -161,5 +165,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Login);

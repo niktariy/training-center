@@ -5,7 +5,7 @@ const getLessonsCourse = courseId =>
 
 const getLessonInfo = lessonId => SECURE_API.get(`lesson/${lessonId}`);
 
-const createLesson = lessonData =>
+const createLesson = (courseId, lessonData) =>
   SECURE_API.post(`course/${courseId}/create_lesson`, lessonData);
 const updateLesson = (lessonId, lessonData) =>
   SECURE_API.put(`lesson/${lessonId}/update`, lessonData);
