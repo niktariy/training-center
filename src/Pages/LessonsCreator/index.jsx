@@ -10,11 +10,12 @@ import {
   Link,
   Typography,
 } from '@material-ui/core';
-import { getCourseById, updateCourse } from '../../_actions';
-import DashboardArea from '../../components/DashboardArea';
-import FormCourseUpdater from '../../components/CourseArea/FormCourseUpdater';
+import { getCourseById, createLesson } from '../../_actions';
 
-class CourseUpdater extends React.Component {
+import DashboardArea from '../../components/DashboardArea';
+import FormLessonCreator from '../../components/Lessons/FormLessonCreator';
+
+class LessonsCreator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +27,8 @@ class CourseUpdater extends React.Component {
   }
 
   render() {
-    const { courseData, loading, updateCourse } = this.props;
+    const { courseData, createLesson } = this.props;
+    const { courseId } = this.state;
 
     return (
       <DashboardArea>
@@ -38,26 +40,22 @@ class CourseUpdater extends React.Component {
               </Link>
               <Link
                 color="inherit"
-                to={`/courses/${this.state.courseId}`}
+                to={`/courses/${courseId}`}
                 component={NavLink}
               >
                 {courseData.courseName}
               </Link>
-              <Typography color="textSecondary">{'Editing course'}</Typography>
+              <Typography color="textSecondary">{'Add lessons'}</Typography>
             </Breadcrumbs>
           </Grid>
           <Grid item>
             <Paper>
               <Box p={3}>
-                {loading ? (
-                  <CircularProgress />
-                ) : (
-                  <FormCourseUpdater
-                    courseId={this.state.courseId}
-                    courseData={courseData}
-                    updateCourse={updateCourse}
-                  />
-                )}
+                <FormLessonCreator
+                  courseId={courseId}
+                  action={createLesson}
+                  minDate={courseData.startDate}
+                />
               </Box>
             </Paper>
           </Grid>
@@ -69,15 +67,14 @@ class CourseUpdater extends React.Component {
 
 const mapStateToProps = state => ({
   courseData: state.coursesReducer.singleCourseData,
-  loading: state.coursesReducer.isGettingCourseProcessing,
 });
 
 const mapDispatchToProps = {
   getCourseById,
-  updateCourse,
+  createLesson,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CourseUpdater);
+)(LessonsCreator);

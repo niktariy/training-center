@@ -32,4 +32,10 @@ export const useStyles = makeStyles(theme => ({
     height: 0,
     width: 0,
   },
+  listeners: {
+    margin: theme.spacing(1, -1 * 0.5),
+  },
+  courseListener: {
+    margin: theme.spacing(0.5),
+  },
 }));

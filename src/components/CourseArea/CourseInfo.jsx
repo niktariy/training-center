@@ -1,27 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { format } from 'date-fns';
+import {
+  Link as RouterLink,
+  useParams,
+  useRouteMatch,
+  Switch,
+  Route,
+} from 'react-router-dom';
 
-import { Link as RouterLink, useParams } from 'react-router-dom';
 import {
   Breadcrumbs,
   Grid,
   Link,
   CircularProgress,
   Box,
+  Chip,
+  Avatar,
+  Paper,
+  Button,
+  Typography,
+  Divider,
 } from '@material-ui/core';
-
-import { formatCategory } from '../../_utils/stringFormatter';
-import DashboardArea from '../DashboardArea';
-import LessonsShedule from '../Lessons/LessonsShedule';
 
 import {
   getCurrentUser,
   getCourseById,
   enrollCourse,
   leaveCourse,
+  findUserInListeners,
 } from '../../_actions';
-import { Paper, Button, Typography } from '@material-ui/core';
+import { formatCategory } from '../../_utils/stringFormatter';
+import DashboardArea from '../DashboardArea';
+import LessonsList from '../Lessons/LessonsList';
+import FormLessonCreator from '../Lessons/FormLessonCreator';
+
 import { useStyles } from './styles';
 
 const CourseInfo = ({
@@ -37,8 +51,8 @@ const CourseInfo = ({
 }) => {
   const classes = useStyles();
   const { courseId } = useParams();
+  const { path, url } = useRouteMatch();
   const [processing, setProcessing] = useState(false);
-
   const {
     id,
     courseName,
@@ -50,6 +64,10 @@ const CourseInfo = ({
     listeners,
   } = courseData;
 
+  const isStartDateAfterNow =
+    new Date(startDate).getTime() > new Date().getTime();
+  const isCurrentUserLector = lecturerId === currentUserId;
+
   const handleEnrollClick = () => {
     enrollCourse(id);
   };
@@ -57,6 +75,51 @@ const CourseInfo = ({
   const handleLeaveClick = () => {
     leaveCourse(id);
   };
+
+  function coursePrimaryInfo() {
+    return (
+      <>
+        <Typography gutterBottom variant="h4" component="h2">
+          {courseName}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {courseDescription}
+        </Typography>
+        <Divider />
+        {courseDuration > 0 && <Typography>{courseDuration} hours</Typography>}
+        <Typography>
+          {'Category: '}
+          {formatCategory(category)}
+        </Typography>
+        <Typography>
+          {'Start Date: '}
+          {startDate && format(new Date(startDate), 'MMM dd, yyyy')}
+        </Typography>
+      </>
+    );
+  }
+
+  function courseListeners() {
+    return (
+      <div className={classes.listeners}>
+        {listeners.map(({ id, firstName, lastName }) => (
+          <Chip
+            key={id + 'listener'}
+            className={classes.courseListener}
+            avatar={
+              <Avatar
+                alt=""
+                aria-hidden
+                src={`https://i.pravatar.cc/150?u=${id}`}
+              />
+            }
+            label={`${firstName} ${lastName}`}
+            variant="outlined"
+          />
+        ))}
+      </div>
+    );
+  }
 
   useEffect(() => {
     if (!currentUserId.length) {
@@ -101,35 +164,32 @@ const CourseInfo = ({
           ) : (
             <Paper>
               <Box p={3}>
-                <Typography gutterBottom variant="h4" component="h2">
-                  {courseName}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {courseDescription}
-                </Typography>
-                {courseDuration && (
-                  <Typography>{courseDuration} hours</Typography>
-                )}
-                <Typography>{formatCategory(category)}</Typography>
-                <Typography>{startDate}</Typography>
-
-                {listeners.map(listener => (
-                  <Typography key={listener.id + 'a'}>
-                    {listener.firstName}
-                  </Typography>
-                ))}
-                {new Date(startDate).getTime() > new Date().getTime() ? (
-                  lecturerId === currentUserId ? (
-                    <Button
-                      size="large"
-                      variant="contained"
-                      color="secondary"
-                      to={`/course/edit/${courseId}`}
-                      disabled={processing}
-                      component={RouterLink}
-                    >
-                      {'Edit course'}
-                    </Button>
+                {coursePrimaryInfo()}
+                {courseListeners()}
+                {isStartDateAfterNow ? (
+                  isCurrentUserLector ? (
+                    <div className={classes.btnWrapper}>
+                      <Button
+                        size="large"
+                        variant="contained"
+                        color="secondary"
+                        to={`/course/edit/${courseId}`}
+                        disabled={processing}
+                        component={RouterLink}
+                      >
+                        {'Edit course'}
+                      </Button>
+                      <Button
+                        size="large"
+                        variant="outlined"
+                        color="secondary"
+                        to={`${url}/add_lesson`}
+                        disabled={processing}
+                        component={RouterLink}
+                      >
+                        {'Add lessons'}
+                      </Button>
+                    </div>
                   ) : (
                     <div className={classes.btnWrapper}>
                       {isSubscribed ? 'Changed your mind?' : null}
@@ -160,7 +220,7 @@ const CourseInfo = ({
           )}
         </Grid>
         <Grid item xs={12}>
-          <LessonsShedule courseId={courseId} />
+          {!isLoading && <LessonsList courseId={courseId} />}
         </Grid>
       </Grid>
     </DashboardArea>
@@ -185,14 +245,6 @@ const mapStateToProps = state => {
   const coursesReducer = state.coursesReducer;
   const currentUserId = state.userReducer.currentUserId;
   const courseData = coursesReducer.singleCourseData;
-
-  function findUserInListeners(listeners, userId) {
-    if (!listeners.length && !userId) {
-      return;
-    }
-    const res = listeners.find(item => item.id === userId);
-    return res !== undefined ? !!Object.keys(res).length : false;
-  }
 
   const isCurrentUserSubscribed = findUserInListeners(
     courseData.listeners,

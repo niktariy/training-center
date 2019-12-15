@@ -15,6 +15,7 @@ import Calendar from './Pages/Calendar';
 import CourseInfo from './components/CourseArea/CourseInfo';
 import CourseCreator from './Pages/CourseCreator';
 import CourseUpdater from './Pages/CourseUpdater';
+import LessonsCreator from './Pages/LessonsCreator';
 
 const App = () => {
   return (
@@ -27,6 +28,11 @@ const App = () => {
         <PrivateRoute exact path="/profile" component={UserProfile} />
         <PrivateRoute exact path="/courses" component={Courses} />
         <PrivateRoute exact path="/courses/:courseId" component={CourseInfo} />
+        <PrivateRoute
+          exact
+          path="/courses/:courseId/add_lesson"
+          component={LessonsCreator}
+        />
         <PrivateRoute exact path="/course/create" component={CourseCreator} />
         <PrivateRoute
           exact

@@ -6,7 +6,7 @@ import { Typography, Paper, Box } from '@material-ui/core';
 
 import { getLessonsByCourse } from '../../_actions';
 
-class LessonsShedule extends React.Component {
+class LessonsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -34,33 +34,25 @@ class LessonsShedule extends React.Component {
           </Typography>
         )}
         {lessons &&
-          lessons.map(
-            ({
-              id,
-              lessonDescription,
-              lessonDuration,
-              lessonTitle,
-              startTime,
-            }) => (
-              <Paper key="id">
-                <Box p={2} mb={1}>
-                  <Typography variant="h6" component="h4">
-                    {lessonTitle}
-                  </Typography>
-                  {formatLessonDate(startTime) +
-                    ' at ' +
-                    formatLessonTime(startTime, lessonDuration)}
-                  <br />
-                </Box>
-              </Paper>
-            )
-          )}
+          lessons.map(({ id, lessonDuration, lessonTitle, startTime }) => (
+            <Paper key={id + lessonTitle}>
+              <Box p={2} mb={1}>
+                <Typography variant="h6" component="h4">
+                  {lessonTitle}
+                </Typography>
+                {formatLessonDate(startTime) +
+                  ' at ' +
+                  formatLessonTime(startTime, lessonDuration)}
+                <br />
+              </Box>
+            </Paper>
+          ))}
       </div>
     );
   }
 }
 
-LessonsShedule.propTypes = {
+LessonsList.propTypes = {
   lessons: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.any.isRequired,
@@ -83,4 +75,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LessonsShedule);
+)(LessonsList);

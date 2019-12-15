@@ -23,7 +23,11 @@ import { fields } from '../../constants/courseCreatorFields';
 import { categories } from '../../constants/categories';
 import { useStyles } from './styles';
 
-const FormCourseCreator = ({ isCourseCreationProgress, isCourseCreated, createCourse }) => {
+const FormCourseCreator = ({
+  isCourseCreationProgress,
+  isCourseCreated,
+  createCourse,
+}) => {
   const { handleSubmit, register, getValues, setValue } = useForm({
     mode: 'onBlur',
   });
@@ -38,7 +42,6 @@ const FormCourseCreator = ({ isCourseCreationProgress, isCourseCreated, createCo
 
     register({ name: 'category', type: 'text', required: true });
     register({ name: 'startDate', type: 'text', required: true });
-
   }, [isCourseCreationProgress, isCourseCreated, register]);
 
   const handleSelectChange = category => {
@@ -61,8 +64,13 @@ const FormCourseCreator = ({ isCourseCreationProgress, isCourseCreated, createCo
     createCourse(values);
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={classes.courseCreatorForm}>
-      <Typography variant="h5" component="h2">Create new course</Typography>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={classes.courseCreatorForm}
+    >
+      <Typography variant="h5" component="h2">
+        Create new course
+      </Typography>
       <TextField
         {...fields.CourseNameProps}
         inputRef={register({
@@ -141,4 +149,7 @@ const mapDispatchToProps = {
   createCourse,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormCourseCreator);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FormCourseCreator);
