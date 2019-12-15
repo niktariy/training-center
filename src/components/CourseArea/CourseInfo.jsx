@@ -2,13 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { format } from 'date-fns';
-import {
-  Link as RouterLink,
-  useParams,
-  useRouteMatch,
-  Switch,
-  Route,
-} from 'react-router-dom';
+import { Link as RouterLink, useParams, useRouteMatch } from 'react-router-dom';
 
 import {
   Breadcrumbs,
@@ -34,7 +28,6 @@ import {
 import { formatCategory } from '../../_utils/stringFormatter';
 import DashboardArea from '../DashboardArea';
 import LessonsList from '../Lessons/LessonsList';
-import FormLessonCreator from '../Lessons/FormLessonCreator';
 
 import { useStyles } from './styles';
 
@@ -51,7 +44,7 @@ const CourseInfo = ({
 }) => {
   const classes = useStyles();
   const { courseId } = useParams();
-  const { path, url } = useRouteMatch();
+  const { url } = useRouteMatch();
   const [processing, setProcessing] = useState(false);
   const {
     id,

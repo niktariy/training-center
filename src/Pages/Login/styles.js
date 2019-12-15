@@ -1,4 +1,4 @@
-import { teal, orange } from '@material-ui/core/colors';
+import { teal } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(theme => ({

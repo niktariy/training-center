@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import useForm from 'react-hook-form';
-import { format, addYears } from 'date-fns';
+import { format } from 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
   KeyboardDateTimePicker,
 } from '@material-ui/pickers';
-import {
-  Button,
-  TextField,
-  MenuItem,
-  Typography,
-  CircularProgress,
-} from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 
 const FormLessonCreator = ({ courseId, action, minDate }) => {
-  const { handleSubmit, register, reset, getValues, setValue } = useForm({
+  const { handleSubmit, register, setValue } = useForm({
     mode: 'onBlur',
     defaultValues: {
       startTime: minDate,
@@ -33,7 +27,6 @@ const FormLessonCreator = ({ courseId, action, minDate }) => {
   }, [minDate, register]);
 
   const onSubmit = values => {
-    debugger;
     action(courseId, values);
   };
 
@@ -76,7 +69,7 @@ const FormLessonCreator = ({ courseId, action, minDate }) => {
         />
       </MuiPickersUtilsProvider>
 
-      <Button type="submit" type="submit" variant="contained" color="primary">
+      <Button type="submit" variant="contained" color="primary">
         {'Create'}
       </Button>
     </form>

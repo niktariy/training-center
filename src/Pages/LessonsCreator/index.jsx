@@ -5,7 +5,6 @@ import {
   Grid,
   Paper,
   Box,
-  CircularProgress,
   Breadcrumbs,
   Link,
   Typography,

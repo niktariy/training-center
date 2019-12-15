@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { history } from '../../_utils/history';
 import { getCurrentUser } from '../../_actions';
-import DashboardArea from '../../components/DashboardArea';
 
 class Dashboard extends React.Component {
   componentDidMount() {

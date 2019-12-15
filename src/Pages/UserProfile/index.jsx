@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Grid, Paper, Divider, Typography } from '@material-ui/core';
+import { Grid, Paper, Typography } from '@material-ui/core';
 
 import {
   getCurrentUser,
-  getCurrentUserRole,
   getLecturerCourses,
   getListenerCourses,
 } from '../../_actions';
@@ -58,7 +57,7 @@ class UserProfile extends React.Component {
           <Grid item xs>
             <ProfileArea user={userData} isLoading={isUserLoading} />
           </Grid>
-          {userData.role == 'ROLE_LECTURER' &&
+          {userData.role === 'ROLE_LECTURER' &&
             generateCourses(isLecturerCoursesLoading, lecturerCourses, true)}
           {generateCourses(isListenerCoursesLoading, listenerCourses)}
         </Grid>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import { Grid, Paper, Box, Typography } from '@material-ui/core';
 import { getUserById } from '../../_actions';
 

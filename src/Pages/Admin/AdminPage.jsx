@@ -2,20 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 
-import { makeStyles } from '@material-ui/core/styles';
 import {
   AppBar,
   Toolbar,
   IconButton,
   Container,
   Grid,
-  Typography,
-  Link,
-  Button,
 } from '@material-ui/core';
 import { ExitToAppRounded as ExitToAppRoundedIcon } from '@material-ui/icons';
 import { userLogout, getAllUsers } from '../../_actions';
-import { history } from '../../_utils/history';
 import UsersList from './UsersList';
 import CreateUser from './CreateUser';
 import EditUser from './EditUser';
@@ -26,7 +21,7 @@ class AdminPage extends React.Component {
   }
 
   render() {
-    const { match, getAllUsers, userData, getUserById } = this.props;
+    const { match, getAllUsers } = this.props;
 
     return (
       <div>

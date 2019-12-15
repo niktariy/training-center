@@ -56,7 +56,6 @@ LessonsList.propTypes = {
   lessons: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.any.isRequired,
-      lessonDescription: PropTypes.string.isRequired,
       lessonDuration: PropTypes.number.isRequired,
       lessonTitle: PropTypes.string.isRequired,
       startTime: PropTypes.string.isRequired,

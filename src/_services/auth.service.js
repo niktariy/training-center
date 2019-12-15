@@ -1,4 +1,4 @@
-import API, { SECURE_API } from '../api/config';
+import API from '../api/config';
 
 const login = authData => API.post('/login', authData);
 
