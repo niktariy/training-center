@@ -16,6 +16,7 @@ import CourseInfo from './components/CourseArea/CourseInfo';
 import CourseCreator from './Pages/CourseCreator';
 import CourseUpdater from './Pages/CourseUpdater';
 import LessonsCreator from './Pages/LessonsCreator';
+import AdminPage from './Pages/Admin/AdminPage';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route exact path="/" component={Login} />
         <Route exact path="/register" component={Register} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/admin" component={AdminPage} />
         <PrivateRoute exact path="/profile" component={UserProfile} />
         <PrivateRoute exact path="/courses" component={Courses} />
         <PrivateRoute exact path="/courses/:courseId" component={CourseInfo} />

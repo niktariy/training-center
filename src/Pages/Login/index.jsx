@@ -28,21 +28,15 @@ const Login = ({ userLogin, isUserLoginProcessing, isLoggedIn }) => {
     mode: 'onBlur',
   });
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
     if (localStorage.getItem('authToken')) {
-      history.push('/courses');
+      history.push('/dashboard');
     } else {
       setLoading(isUserLoginProcessing);
-      setSuccess(isLoggedIn);
     }
   }, [isUserLoginProcessing, isLoggedIn]);
-
-  const buttonClassname = clsx({
-    [classes.buttonSuccess]: success,
-  });
 
   const UsernameProps = {
     id: 'username',
@@ -119,7 +113,6 @@ const Login = ({ userLogin, isUserLoginProcessing, isLoggedIn }) => {
               color="primary"
               size="large"
               disabled={loading}
-              className={buttonClassname}
             >
               {'Sign In'}
             </Button>

@@ -1,4 +1,7 @@
 import {
+  GET_ALL_USERS_REQUEST,
+  GET_ALL_USERS_SUCCESS,
+  GET_ALL_USERS_FAILURE,
   GET_CURRENT_USER_REQUEST,
   GET_CURRENT_USER_SUCCESS,
   GET_CURRENT_USER_FAILURE,
@@ -28,12 +31,24 @@ const defaultState = {
   currentUserId: '',
   currentUserRole: '',
 
+  allUsers: [],
   userData: DEFAULT_USER,
   userRole: '',
   errorMessage: null,
 };
 
 export default createReducer(defaultState, (state, action) => ({
+  [GET_ALL_USERS_REQUEST]: () => ({
+    ...state,
+  }),
+  [GET_ALL_USERS_SUCCESS]: () => ({
+    ...state,
+    allUsers: action.payload.users,
+  }),
+  [GET_ALL_USERS_FAILURE]: () => ({
+    ...state,
+    errorMessage: action.payload,
+  }),
   [GET_CURRENT_USER_REQUEST]: () => ({
     ...state,
     isRequestProcessing: true,
