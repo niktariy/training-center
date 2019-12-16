@@ -4,7 +4,7 @@ import { fields } from './editUserFields';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, TextField, Button, MenuItem } from '@material-ui/core';
 
-import { SECURE_API } from '../../api/config';
+import API from '../../api/config';
 import { roles } from './userRoles';
 import { useStyles } from './styles';
 
@@ -25,7 +25,7 @@ const EditUserForm = ({ userData, userId, updt }) => {
   });
 
   const onSubmit = () => {
-    SECURE_API.put(`admin/${userId}/update_user`, getValues());
+    API.put(`admin/${userId}/update_user`, getValues());
     updt();
   };
 

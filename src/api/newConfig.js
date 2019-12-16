@@ -11,6 +11,7 @@ const headers = () => {
   const h = new Headers();
 
   h.append('Content-Type', 'application/json');
+  debugger;
 
   const session = {
     authToken: localStorage.getItem('authToken'),
@@ -23,7 +24,30 @@ const headers = () => {
   return h;
 };
 
-export default axios.create({
-  baseURL: ENDPOINT,
-  headers: headers(),
-});
+const request = (method, path, data) => {
+  const url = `${ENDPOINT}/${path}`;
+  const options = { method: method, headers: headers() };
+  debugger;
+  if (data) {
+    options.data = data;
+  }
+
+  return axios.create({ url, options });
+};
+
+const Api = {
+  get(path) {
+    return request('get', path);
+  },
+  post(path, data) {
+    return request('post', path, data);
+  },
+  put(path, data) {
+    return request('put', path, data);
+  },
+  delete(path) {
+    return request('delete', path);
+  },
+};
+
+export default Api;
