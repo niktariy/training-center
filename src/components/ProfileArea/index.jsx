@@ -43,11 +43,11 @@ const ProfileArea = ({ user, isLoading }) => {
       </div>
       <Divider />
       <div className={classes.userLinks}>
-        <Link href={`mailto:${user.email}`}>
+        <Link href={`mailto:${user.email}`} className={classes.userLink}>
           <EmailTwoToneIcon size={24} aria-label="email" />
           {user.email}
         </Link>
-        <Link href={`skype:${user.skype}`}>
+        <Link href={`skype:${user.skype}`} className={classes.userLink}>
           <CallTwoToneIcon size={24} aria-label="call skype" />
           {user.skype}
         </Link>

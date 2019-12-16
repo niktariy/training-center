@@ -8,15 +8,23 @@ export const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    padding: theme.spacing(1, 2, 3),
   },
   userAvatar: {
     width: 60,
     height: 60,
-    marging: {
-      top: 0,
-      left: 'auto',
-      bottom: theme.spacing(3),
-      right: 'auto',
+    margin: theme.spacing(0, 1, 1),
+  },
+  userLinks: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: theme.spacing(3, 2, 1),
+  },
+  userLink: {
+    display: 'flex',
+    alignItems: 'center',
+    '& svg': {
+      marginRight: theme.spacing(2),
     },
   },
 }));

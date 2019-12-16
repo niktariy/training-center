@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Grid, Paper, Typography } from '@material-ui/core';
+import { Link as NavLink } from 'react-router-dom';
+import { Grid, Paper, Typography, Box, Button } from '@material-ui/core';
 
 import {
   getCurrentUser,
@@ -15,9 +16,25 @@ import CourseList from '../../components/CourseArea/CourseList';
 function generateCourses(isLoading, courses, isForLector = false) {
   return (
     <Grid item xs={12}>
-      <Typography variant="h4">
-        {isForLector ? 'My created courses' : 'My courses'}
-      </Typography>
+      <Box
+        mt={1}
+        mb={2}
+        display="flex"
+        alignItems="baseline"
+        justifyContent="space-between"
+      >
+        <Typography variant="h4">
+          {isForLector ? 'My created courses' : 'My courses'}
+        </Typography>
+        {isForLector ? (
+          <Button to="/course/create" component={NavLink}>
+            {'Create new'}
+          </Button>
+        ) : (
+          ''
+        )}
+      </Box>
+
       {isLoading ? (
         'Loading'
       ) : courses.length ? (

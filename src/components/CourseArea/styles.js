@@ -38,4 +38,11 @@ export const useStyles = makeStyles(theme => ({
   courseListener: {
     margin: theme.spacing(0.5),
   },
+  courseDescriptionTable: {
+    display: '-webkit-box',
+    '-webkit-line-clamp': 3,
+    '-webkit-box-orient': 'vertical',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+  },
 }));

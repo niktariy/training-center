@@ -69,6 +69,14 @@ const CourseInfo = ({
     leaveCourse(id);
   };
 
+  useEffect(() => {
+    getCurrentUser();
+    getCourseById(courseId);
+    return () => {
+      setProcessing(isSubscribing);
+    };
+  }, [courseId, getCourseById, getCurrentUser, isSubscribed, isSubscribing]);
+
   function coursePrimaryInfo() {
     return (
       <>
@@ -113,26 +121,6 @@ const CourseInfo = ({
       </div>
     );
   }
-
-  useEffect(() => {
-    if (!currentUserId.length) {
-      getCurrentUser();
-    }
-    if (!courseData.id.length) {
-      getCourseById(courseId);
-    }
-    return () => {
-      setProcessing(isSubscribing);
-    };
-  }, [
-    courseData.id.length,
-    currentUserId.length,
-    courseId,
-    getCourseById,
-    getCurrentUser,
-    isSubscribed,
-    isSubscribing,
-  ]);
 
   return (
     <DashboardArea>
@@ -213,7 +201,12 @@ const CourseInfo = ({
           )}
         </Grid>
         <Grid item xs={12}>
-          {!isLoading && <LessonsList courseId={courseId} />}
+          {!isLoading && (
+            <LessonsList
+              courseId={courseId}
+              isForLecturer={isCurrentUserLector}
+            />
+          )}
         </Grid>
       </Grid>
     </DashboardArea>
