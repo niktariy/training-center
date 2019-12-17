@@ -27,7 +27,7 @@ import {
 } from './coursesActionTypes';
 
 const uniqueImagePlaceholder = id =>
-  `https://picsum.photos/id/100${id}/600/500?blur`;
+  `https://picsum.photos/id/102${id}/600/500?blur`;
 
 export const getAllCourses = () => dispatch => {
   dispatch({ type: GET_ALL_COURSES_REQUEST });

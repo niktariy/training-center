@@ -11,7 +11,7 @@ import {
   MenuItem,
 } from '@material-ui/core';
 
-import API from '../../api/config';
+import Api from '../../api/config';
 import { fields } from './createUserFields';
 import { roles } from './userRoles';
 import { useStyles } from './styles';
@@ -26,7 +26,7 @@ const CreateUser = ({ updateUsers }) => {
   });
 
   const onSubmit = () => {
-    API.post('admin/add_user', getValues());
+    Api().post('admin/add_user', getValues());
     updateUsers();
   };
 

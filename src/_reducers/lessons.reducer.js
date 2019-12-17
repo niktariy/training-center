@@ -14,7 +14,7 @@ import {
   DELETE_LESSON_REQUEST,
   DELETE_LESSON_SUCCESS,
   DELETE_LESSON_FAILURE,
-  CLEAR_LESSON_CREATET_STATE,
+  CLEAR_LESSON_CREATED_STATE,
 } from '../_actions';
 import createReducer from '../_utils/createReducer';
 
@@ -82,7 +82,7 @@ export default createReducer(defaultState, (state, action) => ({
     isLessonCreated: false,
     errorMessage: action.payload,
   }),
-  [CLEAR_LESSON_CREATET_STATE]: () => ({
+  [CLEAR_LESSON_CREATED_STATE]: () => ({
     ...state,
     isLessonCreated: false,
   }),
@@ -110,6 +110,7 @@ export default createReducer(defaultState, (state, action) => ({
   [DELETE_LESSON_SUCCESS]: () => ({
     ...state,
     isLessonDeleteRequest: false,
+    lessons: state.lessons.filter(lesson => lesson.id !== action.payload.deletedLessonId),
     isLessonDeleted: true,
   }),
   [DELETE_LESSON_FAILURE]: () => ({

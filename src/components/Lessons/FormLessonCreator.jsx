@@ -36,8 +36,6 @@ const FormLessonCreator = ({
     register({ name: 'startTime', type: 'text', required: true });
 
     if (isLessonCreated) {
-      console.log('created, udpate');
-
       getLessonsByCourse(courseId);
       reset();
     }
@@ -46,9 +44,7 @@ const FormLessonCreator = ({
   const onSubmit = () => {
     setValue('startTime', format(new Date(selectedDate), 'yyyy-MM-dd HH:mm'));
 
-    // values.startTime = format(new Date(values.startTime), 'yyyy-MM-dd HH:mm');
     action(courseId, getValues());
-    console.log('courseId');
   };
 
   return (
@@ -85,6 +81,7 @@ const FormLessonCreator = ({
             label="Start time"
             value={selectedDate}
             minDate={minDate}
+            minutesStep={5}
             onChange={handleDateTimeChange}
             margin="normal"
             fullWidth
@@ -96,7 +93,7 @@ const FormLessonCreator = ({
         </MuiPickersUtilsProvider>
       )}
 
-      <Button type="submit" variant="contained" color="primary">
+      <Button type="submit" size="large" fullWidth variant="contained" color="primary">
         {'Create'}
       </Button>
     </form>
@@ -113,5 +110,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(FormLessonCreator);

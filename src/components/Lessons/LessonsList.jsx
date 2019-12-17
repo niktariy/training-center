@@ -20,7 +20,7 @@ class LessonsList extends React.Component {
   }
 
   render() {
-    const { lessons, isForLecturer, deleteLesson } = this.props;
+    const { lessons, isForLecturer } = this.props;
     const formatLessonDate = date =>
       format(new Date(date), 'EEEE, MMMM dd, yyyy');
     const formatLessonTime = (time, duration) => {
@@ -59,7 +59,7 @@ class LessonsList extends React.Component {
                   </Typography>
                 </Box>
                 {isForLecturer ? (
-                  <IconButton onClick={() => deleteLesson(id)}>
+                  <IconButton onClick={() => this.props.deleteLesson(id)}>
                     <DeleteRoundedIcon />
                   </IconButton>
                 ) : (
