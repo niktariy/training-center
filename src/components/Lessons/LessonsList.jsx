@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { format, addHours } from 'date-fns';
 import { Typography, Paper, Box, IconButton } from '@material-ui/core';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 
+import { formatLessonStart, formatLessonTime } from '../../_utils/dateHelpers';
 import { getLessonsByCourse, deleteLesson } from '../../_actions';
 
 class LessonsList extends React.Component {
@@ -21,15 +21,10 @@ class LessonsList extends React.Component {
 
   render() {
     const { lessons, isForLecturer } = this.props;
-    const formatLessonDate = date =>
-      format(new Date(date), 'EEEE, MMMM dd, yyyy');
-    const formatLessonTime = (time, duration) => {
-      return (
-        format(new Date(time), 'p') +
-        ' - ' +
-        format(addHours(new Date(time), duration), 'p')
-      );
-    };
+    const formatedLessonDateTime = (dateTime, duration) =>
+      formatLessonStart(dateTime) +
+      ' at ' +
+      formatLessonTime(dateTime, duration);
 
     return (
       <div>
@@ -53,9 +48,7 @@ class LessonsList extends React.Component {
                     {lessonTitle}
                   </Typography>
                   <Typography variant="body2">
-                    {formatLessonDate(startTime) +
-                      ' at ' +
-                      formatLessonTime(startTime, lessonDuration)}
+                    {formatedLessonDateTime(startTime, lessonDuration)}
                   </Typography>
                 </Box>
                 {isForLecturer ? (

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { format } from 'date-fns';
 import {
   Table,
   TableBody,
@@ -14,6 +13,7 @@ import {
 import { history } from '../../_utils/history';
 import { stableSort, getSorting } from '../../_utils/sortData';
 import { formatCategory } from '../../_utils/stringFormatter';
+import { formatCourseStart } from '../../_utils/dateHelpers';
 import { useStyles } from './styles';
 
 const headCells = [
@@ -110,9 +110,7 @@ const CourseList = ({ courses }) => {
                       {courseDescription}
                     </span>
                   </TableCell>
-                  <TableCell>
-                    {format(new Date(startDate), 'MMM do, yyyy')}
-                  </TableCell>
+                  <TableCell>{formatCourseStart(startDate)}</TableCell>
                   <TableCell>{formatCategory(category)}</TableCell>
                 </TableRow>
               )

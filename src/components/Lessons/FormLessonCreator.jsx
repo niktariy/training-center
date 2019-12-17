@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import useForm from 'react-hook-form';
 import { connect } from 'react-redux';
-import { format } from 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
   KeyboardDateTimePicker,
 } from '@material-ui/pickers';
 import { Button, TextField } from '@material-ui/core';
+import { formatDateTimeForFields } from '../../_utils/dateHelpers';
 import { getLessonsByCourse } from '../../_actions';
 
 const FormLessonCreator = ({
@@ -28,7 +28,7 @@ const FormLessonCreator = ({
 
   const handleDateTimeChange = value => {
     setSelectedDate(value);
-    setValue('startTime', format(new Date(value), 'yyyy-MM-dd HH:mm'));
+    setValue('startTime', formatDateTimeForFields(value));
   };
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const FormLessonCreator = ({
   }, [courseId, getLessonsByCourse, isLessonCreated, minDate, register, reset]);
 
   const onSubmit = () => {
-    setValue('startTime', format(new Date(selectedDate), 'yyyy-MM-dd HH:mm'));
+    setValue('startTime', formatDateTimeForFields(selectedDate));
 
     action(courseId, getValues());
   };
@@ -93,7 +93,13 @@ const FormLessonCreator = ({
         </MuiPickersUtilsProvider>
       )}
 
-      <Button type="submit" size="large" fullWidth variant="contained" color="primary">
+      <Button
+        type="submit"
+        size="large"
+        fullWidth
+        variant="contained"
+        color="primary"
+      >
         {'Create'}
       </Button>
     </form>
@@ -110,5 +116,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(FormLessonCreator);

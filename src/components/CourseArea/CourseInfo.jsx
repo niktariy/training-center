@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { format } from 'date-fns';
 import { Link as RouterLink, useParams, useRouteMatch } from 'react-router-dom';
 
 import {
@@ -26,23 +25,24 @@ import {
   findUserInListeners,
 } from '../../_actions';
 import { formatCategory } from '../../_utils/stringFormatter';
+import { formatCourseStart } from '../../_utils/dateHelpers';
 import DashboardArea from '../DashboardArea';
 import LessonsList from '../Lessons/LessonsList';
 
 import { useStyles } from './styles';
 
 const CourseInfo = ({
-                      currentUserId,
-                      courseData,
-                      isLoading,
-                      isSubscribing,
-                      isSubscribedUser,
-                      isSubscribed,
-                      getCurrentUser,
-                      getCourseById,
-                      enrollCourse,
-                      leaveCourse,
-                    }) => {
+  currentUserId,
+  courseData,
+  isLoading,
+  isSubscribing,
+  isSubscribedUser,
+  isSubscribed,
+  getCurrentUser,
+  getCourseById,
+  enrollCourse,
+  leaveCourse,
+}) => {
   const classes = useStyles();
   const { courseId } = useParams();
   const { url } = useRouteMatch();
@@ -91,7 +91,7 @@ const CourseInfo = ({
         </Typography>
         <Typography>
           {'Start Date: '}
-          {startDate && format(new Date(startDate), 'MMM dd, yyyy')}
+          {startDate && formatCourseStart(startDate)}
         </Typography>
       </>
     );
@@ -232,7 +232,7 @@ const mapStateToProps = state => {
 
   const isCurrentUserSubscribed = findUserInListeners(
     courseData.listeners,
-    currentUserId,
+    currentUserId
   );
 
   return {
@@ -254,5 +254,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(CourseInfo);
