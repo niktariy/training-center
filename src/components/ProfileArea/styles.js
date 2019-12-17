@@ -1,9 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles(theme => ({
-  userInfoBlock: {
-    padding: theme.spacing(2),
-  },
   userHeader: {
     display: 'flex',
     flexDirection: 'column',
@@ -11,20 +8,26 @@ export const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1, 2, 3),
   },
   userAvatar: {
-    width: 60,
-    height: 60,
+    width: 90,
+    height: 90,
     margin: theme.spacing(0, 1, 1),
   },
   userLinks: {
     display: 'flex',
-    flexDirection: 'column',
-    padding: theme.spacing(3, 2, 1),
+    padding: theme.spacing(1, 2, 1),
   },
   userLink: {
     display: 'flex',
     alignItems: 'center',
+    '& + &': {
+      marginLeft: theme.spacing(2),
+    },
     '& svg': {
       marginRight: theme.spacing(2),
     },
   },
+  userActions: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  }
 }));
