@@ -1,16 +1,16 @@
-import API from '../api/config';
+import Api from '../api/config';
 
 const API_URL = 'lesson';
 
-const getLessonsCourse = courseId => API.get(`course/${courseId}/lessons`);
+const getLessonsCourse = courseId => Api().get(`course/${courseId}/lessons`);
 
-const getLessonInfo = lessonId => API.get(`${API_URL}/${lessonId}`);
+const getLessonInfo = lessonId => Api().get(`${API_URL}/${lessonId}`);
 
 const createLesson = (courseId, lessonData) =>
-  API.post(`course/${courseId}/create_lesson`, lessonData);
+  Api().post(`course/${courseId}/create_lesson`, lessonData);
 const updateLesson = (lessonId, lessonData) =>
-  API.put(`${API_URL}/${lessonId}/update`, lessonData);
-const deleteLesson = lessonId => API.delete(`${API_URL}/${lessonId}/delete`);
+  Api().put(`${API_URL}/${lessonId}/update`, lessonData);
+const deleteLesson = lessonId => Api().delete(`${API_URL}/${lessonId}/delete`);
 
 export const lessonService = {
   getLessonsCourse,

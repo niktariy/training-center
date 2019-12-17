@@ -32,20 +32,20 @@ import LessonsList from '../Lessons/LessonsList';
 import { useStyles } from './styles';
 
 const CourseInfo = ({
-  currentUserId,
-  courseData,
-  isLoading,
-  isSubscribing,
-  isSubscribed,
-  getCurrentUser,
-  getCourseById,
-  enrollCourse,
-  leaveCourse,
-}) => {
+                      currentUserId,
+                      courseData,
+                      isLoading,
+                      isSubscribing,
+                      isSubscribedUser,
+                      isSubscribed,
+                      getCurrentUser,
+                      getCourseById,
+                      enrollCourse,
+                      leaveCourse,
+                    }) => {
   const classes = useStyles();
   const { courseId } = useParams();
   const { url } = useRouteMatch();
-  const [processing, setProcessing] = useState(false);
   const {
     id,
     courseName,
@@ -70,12 +70,9 @@ const CourseInfo = ({
   };
 
   useEffect(() => {
-    getCurrentUser();
     getCourseById(courseId);
-    return () => {
-      setProcessing(isSubscribing);
-    };
-  }, [courseId, getCourseById, getCurrentUser, isSubscribed, isSubscribing]);
+    getCurrentUser();
+  }, [courseId, getCourseById, getCurrentUser, isSubscribedUser]);
 
   function coursePrimaryInfo() {
     return (
@@ -155,7 +152,7 @@ const CourseInfo = ({
                         variant="contained"
                         color="secondary"
                         to={`/course/edit/${courseId}`}
-                        disabled={processing}
+                        disabled={isSubscribing}
                         component={RouterLink}
                       >
                         {'Edit course'}
@@ -165,7 +162,7 @@ const CourseInfo = ({
                         variant="outlined"
                         color="secondary"
                         to={`${url}/add_lesson`}
-                        disabled={processing}
+                        disabled={isSubscribing}
                         component={RouterLink}
                       >
                         {'Add lessons'}
@@ -178,14 +175,14 @@ const CourseInfo = ({
                         size="large"
                         variant={isSubscribed ? 'outlined' : 'contained'}
                         color="secondary"
-                        disabled={processing}
+                        disabled={isSubscribing}
                         onClick={
                           isSubscribed ? handleLeaveClick : handleEnrollClick
                         }
                       >
                         {isSubscribed ? 'Unsubscribe' : 'Enroll'}
                       </Button>
-                      {processing && (
+                      {isSubscribing && (
                         <CircularProgress
                           size={24}
                           className={classes.buttonProgress}
@@ -219,6 +216,7 @@ CourseInfo.propTypes = {
 
   isLoading: PropTypes.bool.isRequired,
   isSubscribing: PropTypes.bool.isRequired,
+  isSubscribedUser: PropTypes.bool.isRequired,
   isSubscribed: PropTypes.bool.isRequired,
 
   getCurrentUser: PropTypes.func.isRequired,
@@ -234,7 +232,7 @@ const mapStateToProps = state => {
 
   const isCurrentUserSubscribed = findUserInListeners(
     courseData.listeners,
-    currentUserId
+    currentUserId,
   );
 
   return {
@@ -242,6 +240,7 @@ const mapStateToProps = state => {
     courseData,
     isLoading: coursesReducer.isGettingCourseProcessing,
     isSubscribing: coursesReducer.isSubscribeProcessing,
+    isSubscribedUser: coursesReducer.isSubscribedUser,
     isSubscribed: isCurrentUserSubscribed || false,
   };
 };
@@ -255,5 +254,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(CourseInfo);

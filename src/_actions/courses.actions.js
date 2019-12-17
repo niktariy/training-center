@@ -175,6 +175,7 @@ export const getListenerCourses = () => dispatch => {
 };
 
 export const findUserInListeners = (listeners, userId) => {
+  debugger
   if (!listeners.length && !userId) {
     return;
   }
