@@ -1,13 +1,7 @@
-export const appointments = [
+export const data = [
   {
-    startDate: '2019-12-09 10:00',
-    endDate: '2019-12-09 11:00',
-    title: 'Meeting',
-  },
-  {
-    startDate: '2019-12-01 18:00',
-    endDate: '2019-12-01 19:30',
-    title: 'Go to a gym',
+    StartDate: '2019-17-10 9:20',
+    EndDate: '2019-17-10 12:20',
+    title: 'Leson1',
   },
 ];
-export const currentDate = new Date();
