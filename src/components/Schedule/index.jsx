@@ -1,41 +1,54 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { addHours } from 'date-fns';
-import { startOfWeek, startOfMonth } from 'date-fns/startOfHour';
+import { addHours, startOfWeek, startOfMonth } from 'date-fns';
 import { EditingState, ViewState } from '@devexpress/dx-react-scheduler';
 import {
   Appointments,
+  AppointmentTooltip,
+  AppointmentForm,
   Scheduler,
   WeekView,
   MonthView,
   Toolbar,
+  Resources,
   ViewSwitcher,
   DateNavigator,
   TodayButton,
   CurrentTimeIndicator,
 } from '@devexpress/dx-react-scheduler-material-ui';
-
 import { Grid, Paper } from '@material-ui/core';
 
+import Api from '../../api/config';
 import { currentDate } from '../../_utils/dateHelpers';
 
 import { CheckBoxContainer } from './CheckBoxContainer';
 import { ToolbarWithLoading } from './Toolbar';
 
-const formatStartEnd = (currentDate, currentViewName) => {
+const mapData = data =>
+  data.flatMap(({ id: courseId, courseName: title, lessons }) =>
+    lessons.map(({ lessonTitle, startTime: startDate, lessonDuration: duration }) => ({
+      courseId,
+      title,
+      lessonTitle,
+      startDate,
+      endDate: addHours(new Date(startDate), duration),
+    }))
+  );
+
+const formatQueryString = (currentDate, currentViewName) => {
   const format = 'YYYY-MM-DDTHH:mm';
   const start = moment(currentDate).startOf(currentViewName.toLowerCase());
   const end = start.clone().endOf(currentViewName.toLowerCase());
-  return { start: start.format(format), end: end.format(format) };
+  return `start=${start.format(format)}&end=${end.format(format)}`;
 };
 
 class Schedule extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      data: this.props.appointments,
-      loading: this.props.isLoading,
+      data: [],
+      loading: true,
       shadePreviousCells: true,
       shadePreviousAppointments: true,
       updateInterval: 10000,
@@ -46,11 +59,9 @@ class Schedule extends React.PureComponent {
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.currentDateChange = currentDate => {
       this.setState({ currentDate, loading: true });
-      this.loadData();
     };
     this.currentViewNameChange = currentViewName => {
       this.setState({ currentViewName, loading: true });
-      this.loadData();
     };
   }
 
@@ -65,21 +76,33 @@ class Schedule extends React.PureComponent {
     this.loadData();
   }
 
+  componentDidUpdate() {
+    this.loadData();
+  }
+
   loadData() {
     const { currentDate, currentViewName, loading } = this.state;
-    const query = formatStartEnd(currentDate, currentViewName);
+    const query = formatQueryString(currentDate, currentViewName);
     if (query === this.lastQuery) {
       this.setState({ loading: false });
       return;
     }
-    this.props.getData(query);
-    this.setState({
-      data: this.props.appointments,
-      loading: this.props.isLoading,
-    });
-    if (!loading) {
-      this.lastQuery = query;
-    }
+
+    Api()
+      .get(`calendar?${query}`)
+      .then(({ data }) => {
+        this.setState({
+          data,
+          loading: false,
+        });
+      })
+      .catch(error => {
+        console.warn(error);
+        this.setState({
+          loading: false,
+        });
+      });
+    this.lastQuery = query;
   }
 
   render() {
@@ -92,6 +115,8 @@ class Schedule extends React.PureComponent {
       shadePreviousAppointments,
     } = this.state;
 
+    const formattedData = data ? mapData(data) : [];
+
     return (
       <>
         <Grid container>
@@ -103,7 +128,7 @@ class Schedule extends React.PureComponent {
         </Grid>
 
         <Paper>
-          <Scheduler data={data}>
+          <Scheduler data={formattedData}>
             <ViewState
               currentDate={currentDate}
               currentViewName={currentViewName}
@@ -111,14 +136,15 @@ class Schedule extends React.PureComponent {
               onCurrentDateChange={this.currentDateChange}
             />
 
-            <WeekView startDayHour={9} endDayHour={19} />
-            <MonthView startDayHour={9} endDayHour={19} />
+            <WeekView startDayHour={8} endDayHour={20} />
+            <MonthView startDayHour={8} endDayHour={20} />
 
             <Toolbar {...(loading ? { rootComponent: ToolbarWithLoading } : null)} />
             <DateNavigator />
             <TodayButton />
             <ViewSwitcher />
             <Appointments />
+            <AppointmentTooltip />
 
             <CurrentTimeIndicator
               shadePreviousCells={shadePreviousCells}
@@ -130,11 +156,5 @@ class Schedule extends React.PureComponent {
     );
   }
 }
-
-Schedule.propTypes = {
-  appointments: PropTypes.array.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  getData: PropTypes.func.isRequired,
-};
 
 export default Schedule;

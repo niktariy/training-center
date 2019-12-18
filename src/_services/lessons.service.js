@@ -15,8 +15,8 @@ const updateLesson = (lessonId, lessonData) =>
 const deleteLesson = lessonId =>
   Api().delete(`${API_PREFIX}/${lessonId}/delete`);
 
-const getUserLessonsByDate = ({ start, end }) =>
-  Api().get(`calendar?start=${start}&end=${end}`);
+const getUserLessonsByDate = queryString =>
+  Api().get(`calendar?${queryString}`);
 
 export const lessonService = {
   getLessonsCourse,

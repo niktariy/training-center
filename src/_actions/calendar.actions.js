@@ -4,13 +4,13 @@ export const GET_LESSONS_DATE_REQUEST = 'GET_LESSONS_DATE_REQUEST';
 export const GET_LESSONS_DATE_SUCCESS = 'GET_LESSONS_DATE_SUCCESS';
 export const GET_LESSONS_DATE_FAILURE = 'GET_LESSONS_DATE_FAILURE';
 
-export const getUserLessonsByDate = ({ start, end }) => dispatch => {
+export const getUserLessonsByDate = query => dispatch => {
   dispatch({
     type: GET_LESSONS_DATE_REQUEST,
   });
 
   lessonService
-    .getUserLessonsByDate({ start, end })
+    .getUserLessonsByDate(query)
     .then(res => {
       dispatch({
         type: GET_LESSONS_DATE_SUCCESS,
