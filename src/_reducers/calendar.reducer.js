@@ -7,23 +7,23 @@ import createReducer from '../_utils/createReducer';
 
 const defaultState = {
   calendarLessons: [],
-  isUserLoginProcessing: false,
+  isGettingLessons: false,
   errorMessage: null,
 };
 
 export default createReducer(defaultState, (state, action) => ({
   [GET_LESSONS_DATE_REQUEST]: () => ({
     ...state,
-    isUserLoginProcessing: true,
+    isGettingLessons: true,
   }),
   [GET_LESSONS_DATE_SUCCESS]: () => ({
     ...state,
-    isUserLoginProcessing: false,
+    isGettingLessons: false,
     calendarLessons: action.payload.lessons,
   }),
   [GET_LESSONS_DATE_FAILURE]: () => ({
     ...state,
-    isUserLoginProcessing: false,
+    isGettingLessons: false,
     errorMessage: action.payload,
   }),
 }));
