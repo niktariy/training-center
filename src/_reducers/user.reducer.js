@@ -65,15 +65,6 @@ export default createReducer(defaultState, (state, action) => ({
     errorMessage: action.payload.error,
   }),
 
-  [GET_USER_ROLE_SUCCESS]: () => ({
-    ...state,
-    currentUserRole: action.payload,
-  }),
-  [GET_USER_ROLE_FAILURE]: () => ({
-    ...state,
-    errorMessage: action.payload,
-  }),
-
   [GET_USER_BY_ID_REQUEST]: () => ({
     ...state,
     isRequestProcessing: true,

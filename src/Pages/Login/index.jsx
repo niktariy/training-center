@@ -60,7 +60,7 @@ const Login = ({ userLogin, isUserLoginProcessing, isLoggedIn }) => {
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>ui</Avatar>
+        <Avatar className={classes.avatar}>TC</Avatar>
         <Typography component="h1" variant="h4">
           {'Welcome Back!'}
         </Typography>
