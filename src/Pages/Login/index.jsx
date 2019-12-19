@@ -19,10 +19,10 @@ import {
 } from '@material-ui/core';
 
 import Copyright from '../../components/Copyright';
-import { userLogin } from '../../_actions';
+import { userLogin, getCurrentUser } from '../../_actions';
 import { useStyles } from './styles';
 
-const Login = ({ userLogin, isUserLoginProcessing, isLoggedIn }) => {
+const Login = ({ userLogin, user, getCurrentUser, isUserLoginProcessing, isLoggedIn }) => {
   const { handleSubmit, register, errors } = useForm({
     mode: 'onBlur',
   });
@@ -31,11 +31,15 @@ const Login = ({ userLogin, isUserLoginProcessing, isLoggedIn }) => {
 
   useEffect(() => {
     if (localStorage.getItem('authToken')) {
-      history.push('/dashboard');
+      getCurrentUser();
+      if (!!user.role.length) {
+        user.role === 'ROLE_ADMIN' ?
+          history.push('/admin/users') : history.push('/profile');
+      }
     } else {
       setLoading(isUserLoginProcessing);
     }
-  }, [isUserLoginProcessing, isLoggedIn]);
+  }, [isUserLoginProcessing, isLoggedIn, user, getCurrentUser]);
 
   const UsernameProps = {
     id: 'username',
@@ -127,7 +131,7 @@ const Login = ({ userLogin, isUserLoginProcessing, isLoggedIn }) => {
             </Grid>
             <Grid item>
               <Link to={'/register'} variant="body2" component={RoterLink}>
-                {"Don't have an account? Sign Up"}
+                {'Don\'t have an account? Sign Up'}
               </Link>
             </Grid>
           </Grid>
@@ -142,6 +146,8 @@ const Login = ({ userLogin, isUserLoginProcessing, isLoggedIn }) => {
 
 Login.propTypes = {
   userLogin: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  getCurrentUser: PropTypes.func.isRequired,
   isUserLoginProcessing: PropTypes.bool.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
 };
@@ -149,13 +155,15 @@ Login.propTypes = {
 const mapStateToProps = state => ({
   isUserLoginProcessing: state.authReducer.isUserLoginProcessing,
   isLoggedIn: state.authReducer.isLoggedIn,
+  user: state.userReducer.currentUser,
 });
 
 const mapDispatchToProps = {
   userLogin,
+  getCurrentUser,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Login);

@@ -3,11 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="28cc6aa3-a480-4368-aa10-0c8064469a78" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Admin/AdminPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Admin/AdminPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Dashboard/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Dashboard/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/Login/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Login/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_actions/auth.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_actions/auth.actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_actions/user.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_actions/user.actions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/_reducers/user.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_reducers/user.reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/index.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +89,7 @@
       <workItem from="1576062862367" duration="8289000" />
       <workItem from="1576166069074" duration="20269000" />
       <workItem from="1576576688644" duration="10622000" />
-      <workItem from="1576753883019" duration="2147000" />
+      <workItem from="1576753883019" duration="4922000" />
     </task>
     <servers />
   </component>
@@ -135,10 +137,10 @@
       <screen x="0" y="0" width="1920" height="1053" />
     </state>
     <state x="529" y="153" width="471" height="747" key="VCS.ChangeListViewerDialog/0.0.1920.1053/1920.0.1920.1080@0.0.1920.1053" timestamp="1576583046975" />
-    <state x="631" y="108" width="787" height="808" key="find.popup" timestamp="1576755357146">
+    <state x="937" y="62" width="787" height="808" key="find.popup" timestamp="1576758668758">
       <screen x="0" y="0" width="1920" height="1053" />
     </state>
-    <state x="631" y="108" width="787" height="808" key="find.popup/0.0.1920.1053/1920.0.1920.1080@0.0.1920.1053" timestamp="1576755357146" />
+    <state x="937" y="62" width="787" height="808" key="find.popup/0.0.1920.1053/1920.0.1920.1080@0.0.1920.1053" timestamp="1576758668758" />
     <state x="2551" y="111" width="787" height="828" key="find.popup/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576236359683" />
     <state x="2539" y="240" key="run.anything.popup" timestamp="1576167935007">
       <screen x="1920" y="0" width="1920" height="1080" />
