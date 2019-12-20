@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28cc6aa3-a480-4368-aa10-0c8064469a78" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/CourseArea/FormCourseContainer.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Dashboard/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Dashboard/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Login/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Login/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_actions/auth.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_actions/auth.actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_actions/user.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_actions/user.actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_reducers/user.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_reducers/user.reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navigation/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_actions/courses.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/_actions/courses.actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CourseArea/CourseInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseArea/CourseInfo.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CourseArea/FormCourseCreator.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseArea/FormCourseCreator.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CourseArea/FormCourseUpdater.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseArea/FormCourseUpdater.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CourseArea/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourseArea/styles.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +89,8 @@
       <workItem from="1576062862367" duration="8289000" />
       <workItem from="1576166069074" duration="20269000" />
       <workItem from="1576576688644" duration="10622000" />
-      <workItem from="1576753883019" duration="4922000" />
+      <workItem from="1576753883019" duration="5196000" />
+      <workItem from="1576845932264" duration="3640000" />
     </task>
     <servers />
   </component>
@@ -113,25 +114,25 @@
       <screen x="0" y="0" width="1920" height="1053" />
     </state>
     <state x="100" y="103" width="1340" height="850" key="DiffContextDialog/0.0.1920.1053/1920.0.1920.1080@0.0.1920.1053" timestamp="1576583045981" />
-    <state width="1590" height="257" key="GridCell.Tab.0.bottom" timestamp="1576753979923">
+    <state width="1590" height="257" key="GridCell.Tab.0.bottom" timestamp="1576759081900">
       <screen x="0" y="0" width="1920" height="1053" />
     </state>
-    <state width="1590" height="257" key="GridCell.Tab.0.bottom/0.0.1920.1053/1920.0.1920.1080@0.0.1920.1053" timestamp="1576753979923" />
+    <state width="1590" height="257" key="GridCell.Tab.0.bottom/0.0.1920.1053/1920.0.1920.1080@0.0.1920.1053" timestamp="1576759081900" />
     <state width="1887" height="257" key="GridCell.Tab.0.bottom/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576254091325" />
-    <state width="1590" height="257" key="GridCell.Tab.0.center" timestamp="1576753979923">
+    <state width="1590" height="257" key="GridCell.Tab.0.center" timestamp="1576759081899">
       <screen x="0" y="0" width="1920" height="1053" />
     </state>
-    <state width="1590" height="257" key="GridCell.Tab.0.center/0.0.1920.1053/1920.0.1920.1080@0.0.1920.1053" timestamp="1576753979923" />
+    <state width="1590" height="257" key="GridCell.Tab.0.center/0.0.1920.1053/1920.0.1920.1080@0.0.1920.1053" timestamp="1576759081899" />
     <state width="1887" height="257" key="GridCell.Tab.0.center/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576254091324" />
-    <state width="1590" height="257" key="GridCell.Tab.0.left" timestamp="1576753979923">
+    <state width="1590" height="257" key="GridCell.Tab.0.left" timestamp="1576759081899">
       <screen x="0" y="0" width="1920" height="1053" />
     </state>
-    <state width="1590" height="257" key="GridCell.Tab.0.left/0.0.1920.1053/1920.0.1920.1080@0.0.1920.1053" timestamp="1576753979923" />
+    <state width="1590" height="257" key="GridCell.Tab.0.left/0.0.1920.1053/1920.0.1920.1080@0.0.1920.1053" timestamp="1576759081899" />
     <state width="1887" height="257" key="GridCell.Tab.0.left/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576254091324" />
-    <state width="1590" height="257" key="GridCell.Tab.0.right" timestamp="1576753979923">
+    <state width="1590" height="257" key="GridCell.Tab.0.right" timestamp="1576759081899">
       <screen x="0" y="0" width="1920" height="1053" />
     </state>
-    <state width="1590" height="257" key="GridCell.Tab.0.right/0.0.1920.1053/1920.0.1920.1080@0.0.1920.1053" timestamp="1576753979923" />
+    <state width="1590" height="257" key="GridCell.Tab.0.right/0.0.1920.1053/1920.0.1920.1080@0.0.1920.1053" timestamp="1576759081899" />
     <state width="1887" height="257" key="GridCell.Tab.0.right/0.0.1920.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576254091325" />
     <state x="529" y="153" width="471" height="747" key="VCS.ChangeListViewerDialog" timestamp="1576583046975">
       <screen x="0" y="0" width="1920" height="1053" />
